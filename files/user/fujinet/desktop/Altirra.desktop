@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Altirra
+Comment=Altirra in PlayOnLinux
+Type=Application
+Exec=/usr/share/playonlinux/playonlinux --run "Altirra64" %F
+Icon=/home/vcf/.PlayOnLinux//icons/full_size/Altirra64
+StartupWMClass=Altirra64.exe 
+Categories=

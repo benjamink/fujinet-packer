@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=FujiNet-PC
+Comment=FujiNet-PC in PlayOnLinux
+Type=Application
+Exec=/usr/share/playonlinux/playonlinux --run "FujiNet-PC" -u "0.0.0.0:8000" %F
+Icon=/home/vcf/.PlayOnLinux//icons/full_size/FujiNet-PC
+StartupWMClass=launcher.exe 
+Categories=
+Terminal=false
+StartupNotify=false
