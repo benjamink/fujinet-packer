@@ -25,7 +25,7 @@ source "qemu" "fujinet" {
   http_directory   = "http"
   boot_command = [
     "<wait><esc><wait>",
-    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
+    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg netcfg/get_hostname=fujinet-vm DEBCONF_DEBUG=5<enter><wait><enter>"
   ]
   qemuargs = [
     ["-m", "2048M"],
