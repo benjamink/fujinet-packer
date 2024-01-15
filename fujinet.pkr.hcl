@@ -12,7 +12,8 @@ source "qemu" "fujinet" {
   iso_checksum      = "sha256:64d727dd5785ae5fcfd3ae8ffbede5f40cca96f1580aaa2820e8b99dae989d94"
   ssh_username      = "fujinet"
   ssh_password      = "online"
-  ssh_wait_timeout  = "30s"
+  ssh_wait_timeout  = "3600s"
+  ssh_pty           = true
   boot_wait         = "10s"
   disk_size         = "10000"
   format            = "qcow2"
@@ -20,19 +21,14 @@ source "qemu" "fujinet" {
   accelerator       = "kvm"
   net_device        = "virtio-net"
   output_directory  = "output-qemu"
-  vm_name           = "debian-10-qemu"
+  vm_name           = "debian-12-qemu"
   http_directory    = "http"
   boot_command      = [
-    "<esc><esc><enter><wait>",
-    "/install.amd/vmlinuz",
-    " auto=true ",
-    " hostname={{ .Name }} ",
-    " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-    " debian-installer=en_US auto ",
-    " locale=en_US.UTF-8 ",
-    " keymap=us ",
-    " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-    " -- <enter>"
+    "<wait><esc><wait>",
+    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
+  ]
+  qemuargs          = [
+    [ "-m", "2048M" ],
   ]
 }
 
@@ -43,15 +39,12 @@ build {
   ]
 
   provisioner "shell" {
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive"
+    ]
     inline = [
       "sleep 30",
-      "sudo debconf-set-selections <<< 'debconf debconf/frontend select Noninteractive'",
-      "sudo apt-get update",
-      "sudo apt-get install -y openssh-server sudo",
-      "sudo sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config",
-      "sudo systemctl enable ssh",
-      "sudo systemctl start ssh",
-      "sudo apt-get clean"
+      "sudo apt install -y vim samba samba-common-bin
       ]
   }
 }
