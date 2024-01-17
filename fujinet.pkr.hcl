@@ -8,9 +8,9 @@ packer {
 }
 
 locals {
-  username                  = "fujinet"
-  fujinet_pc_bundle_zip_url = "https://github.com/a8jan/fujinet-pc-launcher/releases/download/release-2401.1/fujinet-pc-bundle_2401.1_windows-x64.zip"
-  altirra_zip_url           = "https://virtualdub.org/downloads/Altirra-4.20.zip"
+  username           = "fujinet"
+  fujinet_pc_zip_url = "https://github.com/a8jan/fujinet-pc-launcher/releases/download/release-2401.1/fujinet-pc-bundle_2401.1_windows-x64.zip"
+  altirra_zip_url    = "https://virtualdub.org/downloads/Altirra-4.20.zip"
 }
 
 source "qemu" "fujinet" {
@@ -24,17 +24,17 @@ source "qemu" "fujinet" {
   disk_size        = "10000"
   format           = "qcow2"
   headless         = true
-  accelerator      = "kvm"
   net_device       = "virtio-net"
   output_directory = "output-qemu"
-  vm_name          = "debian-12-qemu"
+  vm_name          = "debian-12-qemu.qcow2"
   http_directory   = "http"
   boot_command = [
     "<wait><esc><wait>",
     "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
   ]
   qemuargs = [
-    ["-m", "2048M"],
+    ["-m", "8192M"],
+    ["-smp", "2"]
   ]
 }
 
@@ -44,38 +44,24 @@ build {
     "source.qemu.fujinet"
   ]
 
-  provisioner "shell" {
-    environment_vars = [
-      "DEBIAN_FRONTEND=noninteractive"
-    ]
-    inline = [
-      "sudo apt install -y vim samba samba-common-bin xfce4 playonlinux",
-      "sudo useradd -c 'tnfsd user' -U -m -d /tnfs -r tnfs",
-      "sudo usermod -a -G tnfs ${local.username}"
-    ]
-  }
-
   provisioner "file" {
-    source      = "files/tnfs/smb.conf"
-    destination = "/tmp/tnfs-smb.conf"
-  }
-
-  provisioner "file" {
-    source      = "files/lightdm/lightdm-gtk-greeter.conf"
-    destination = "/tmp/lightdm-gtk-greeter.conf"
-  }
-
-  provisioner "file" {
-    source      = "files/user/${local.username}/wallpaper.png"
-    destination = "/home/${local.username}/Pictures/wallpaper.png"
+    source      = "files/wallpaper.png"
+    destination = "/tmp"
   }
 
   provisioner "shell" {
-    inline = [
-      "sudo cat /tmp/tnfs-smb.conf >> /etc/samba/smb.conf",
-      "sudo mv /tmp/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf",
-      "sudo cp /home/${local.username}/Pictures/wallpaper.png /etc/lightdm/login-logo.png",
-      "rm /tmp/tnfs-smb.conf"
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive",
+      "P_USERNAME=${local.username}",
+      "P_ALTIRRA_ZIP_URL=${local.altirra_zip_url}",
+      "P_FUJINET_PC_ZIP_URL=${local.fujinet_pc_zip_url}"
+    ]
+    scripts = [
+      "scripts/tnfs-install.sh",
+      "scripts/user-setup.sh",
+      "scripts/lightdm-greeter.sh",
+      "scripts/install-altirra.sh",
+      "scripts/install-fujinet-pc.sh"
     ]
   }
 
@@ -84,15 +70,8 @@ build {
     destination = "/home/${local.username}/Desktop"
   }
 
-  provisioner "shell" {
-    inline = [
-      "curl -sLo /home/${local.username}/Downloads/fujinet-pc-bundle.zip ${local.fujinet_pc_bundle_zip_url}",
-      "curl -sLo /home/${local.username}/Downloads/altirra.zip ${local.altirra_zip_url}",
-      "mkdir /home/${local.username}/FujiNet",
-      "cd /home/${local.username}/FujiNet",
-      "unzip /home/${local.username}/Downloads/fujinet-pc-bundle.zip",
-      "unzip /home/${local.username}/Downloads/altirra.zip",
-      "rm -f /home/${local.username}/Downloads/*.zip"
-    ]
+  provisioner "file" {
+    source      = "files/user/initial-setup.sh"
+    destination = "/home/${local.username}/"
   }
 }
