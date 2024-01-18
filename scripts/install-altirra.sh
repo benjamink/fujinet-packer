@@ -51,10 +51,11 @@ cat <<EOF > "$INSTALL_PATH/Altirra.ini"
 
 [User\Software\virtualdub.org\Altirra\Device config history]
 "custom" = "{\"hotreload\":false,\"path\":\"$NETSIO_DEV_PATH\"}"
-
-[User\Software\virtualdub.org\Altirra\Saved filespecs]
-"63756476" = "$(echo "${NETSIO_DEV_PATH%\\*}" | sed 's#\\\\#\\#g')"
 EOF
+
+# This is probably not needed in the Altirra.ini
+#[User\Software\virtualdub.org\Altirra\Saved filespecs]
+#"63756476" = "$(echo "${NETSIO_DEV_PATH%\\*}" | sed 's#\\\\#\\#g')"
 
 echo <<EOF > "$INSTALL_PATH/start-altirra.sh"
 #!/usr/bin/env bash 
