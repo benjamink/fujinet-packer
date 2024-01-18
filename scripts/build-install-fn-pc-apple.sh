@@ -3,19 +3,20 @@ set -x
 
 sudo apt install -y python-is-python3 build-essential cmake libexpat-dev libmbedtls-dev python3-jinja2 python3-yaml
 
-CODE_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
+FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 INSTALL_PATH="$CODE_PATH/FujiNet-PC-Apple"
-mkdir -p "$CODE_PATH"
-cd "$CODE_PATH"
+mkdir -p "$FN_PATH"
+cd "$FN_PATH"
 
 git clone https://github.com/FujiNetWIFI/fujinet-platformio
 
-cd "$CODE_PATH/fujinet-platformio"
+FNPIO_PATH="$FN_PATH/fujinet-platformio"
+cd "$FNPIO_PATH" 
 
 ./build.sh -cp APPLE
 
 mkdir -p "$INSTALL_PATH"
-cp -r "$CODE_PATH/build/*" "$INSTALL_PATH/"
+cp -r "$FN_PATH/build/*" "$INSTALL_PATH/"
 
 cat <<EOF | sudo tee /etc/system/systemd/fn-pc-atari.service 
 [Unit]

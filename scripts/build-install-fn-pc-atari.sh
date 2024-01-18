@@ -5,17 +5,18 @@ sudo apt install -y python-is-python3 build-essential cmake libexpat-dev libmbed
 
 FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 INSTALL_PATH="$FN_PATH/FujiNet-PC-Atari"
-mkdir -p "$CODE_PATH"
-cd "$CODE_PATH"
+mkdir -p "$FN_PATH"
+cd "$FN_PATH"
 
 git clone https://github.com/FujiNetWIFI/fujinet-platformio
 
-cd "$CODE_PATH/fujinet-platformio"
+FNPIO_PATH="$FN_PATH/fujinet-platformio"
+cd "$FNPIO_PATH"
 
 ./build.sh -cp ATARI
 
 mkdir -p "$INSTALL_PATH"
-cp -r "$CODE_PATH/build/*" "$INSTALL_PATH/"
+cp -r "$FNPIO_PATH/build/*" "$INSTALL_PATH/"
 
 cat <<EOF | sudo tee /etc/system/systemd/fn-pc-atari.service 
 [Unit]
