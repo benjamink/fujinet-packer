@@ -67,7 +67,8 @@ build {
       "scripts/clone-fujinet-repos.sh",
       "scripts/build-install-fn-pc-apple.sh",
       "scripts/build-install-fn-pc-atari.sh",
-      "scripts/install-altirra.sh"
+      "scripts/install-altirra.sh",
+      "scripts/install-applewin-linux.sh"
     ]
   }
 
