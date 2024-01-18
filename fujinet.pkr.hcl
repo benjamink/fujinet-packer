@@ -8,10 +8,8 @@ packer {
 }
 
 locals {
-  username           = "fujinet"
-  fujinet_platformio_url = "https://github.com/FujiNetWIFI/fujinet-platformio.git"
-  fujinet_apps_url = "https://github.com/FujiNetWIFI/fujinet-apps.git"
-  altirra_zip_url    = "https://virtualdub.org/downloads/Altirra-4.20.zip"
+  username        = "fujinet"
+  altirra_zip_url = "https://virtualdub.org/downloads/Altirra-4.20.zip"
 }
 
 source "qemu" "fujinet" {
@@ -55,16 +53,14 @@ build {
       "DEBIAN_FRONTEND=noninteractive",
       "P_USERNAME=${local.username}",
       "P_ALTIRRA_ZIP_URL=${local.altirra_zip_url}",
-      "P_FUJINET_PLATFORMIO_URL=${local.fujinet_platformio_url}",
-      "P_FUJINET_APPS_URL=${local.fujinet_apps_url}",
-      "P_CODE_PATH=/home/${local.username}/code"
+      "P_FN_PATH=/home/${local.username}/FujiNet"
     ]
     scripts = [
       "scripts/tnfs-install.sh",
       "scripts/user-setup.sh",
       "scripts/lightdm-greeter.sh",
       "scripts/install-wine.sh",
-      "scripts/clone-fujinet-repos.sh",
+      "scripts/setup-fujinet-apps.sh",
       "scripts/build-install-fn-pc-apple.sh",
       "scripts/build-install-fn-pc-atari.sh",
       "scripts/install-altirra.sh",

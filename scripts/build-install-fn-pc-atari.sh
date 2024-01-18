@@ -3,12 +3,12 @@ set -x
 
 sudo apt install -y python-is-python3 build-essential cmake libexpat-dev libmbedtls-dev python3-jinja2 python3-yaml 
 
-INSTALL_PATH="/home/$P_USERNAME/FujiNet/FujiNet-PC-Atari"
-CODE_PATH="${P_CODE_PATH:-/home/$P_USERNAME/code}"
+FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
+INSTALL_PATH="$FN_PATH/FujiNet-PC-Atari"
 mkdir -p "$CODE_PATH"
 cd "$CODE_PATH"
 
-git clone "$P_FUJINET_PLATFORMIO_URL"
+git clone https://github.com/FujiNetWIFI/fujinet-platformio
 
 cd "$CODE_PATH/fujinet-platformio"
 

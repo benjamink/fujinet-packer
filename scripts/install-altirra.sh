@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -x
 
-INSTALL_PATH="/home/$P_USERNAME/FujiNet/Altirra"
-NETSIO_DEV_PATH="Z:\\\\home\\\\$P_USERNAME\\\\FujiNet\\\\emulator\\\\altirra-custom-device\\\\netsio.atdevice"
+INSTALL_PATH="$P_FN_PATH/Altirra"
+NETSIO_DEV_PATH="Z:$(echo "$INSTALL_PATH/netsio.atdevice" | sed 's#/#\\\\\\\\#g')"
 
 # Clone fujinet-emulator-bridge
 mkdir -p "$INSTALL_PATH"
@@ -53,7 +53,7 @@ cat <<EOF > "$INSTALL_PATH/Altirra.ini"
 "custom" = "{\"hotreload\":false,\"path\":\"$NETSIO_DEV_PATH\"}"
 
 [User\Software\virtualdub.org\Altirra\Saved filespecs]
-"63756476" = "Z:\\home\\$P_USERNAME\\FujiNet\\emulator\\Altirra\\"
+"63756476" = "$(echo "${NETSIO_DEV_PATH%\\*}" | sed 's#\\\\#\\#g')"
 EOF
 
 echo <<EOF > "$INSTALL_PATH/start-altirra.sh"
