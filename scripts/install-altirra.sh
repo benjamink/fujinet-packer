@@ -4,6 +4,8 @@ set -x
 INSTALL_PATH="$P_FN_PATH/Altirra"
 NETSIO_DEV_PATH="Z:$(echo "$INSTALL_PATH/netsio.atdevice" | sed 's#/#\\\\\\\\#g')"
 
+sudo apt install -y git
+
 # Clone fujinet-emulator-bridge
 mkdir -p "$INSTALL_PATH"
 cd "$INSTALL_PATH"

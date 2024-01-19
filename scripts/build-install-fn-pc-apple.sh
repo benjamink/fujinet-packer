@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -x
 
-sudo apt install -y python-is-python3 build-essential cmake libexpat-dev libmbedtls-dev python3-jinja2 python3-yaml
+sudo apt install -y git python-is-python3 build-essential cmake libexpat-dev libmbedtls-dev python3-jinja2 python3-yaml
 
 FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 INSTALL_PATH="$CODE_PATH/FujiNet-PC-Apple"
