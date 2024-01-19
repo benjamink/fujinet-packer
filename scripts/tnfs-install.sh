@@ -2,14 +2,14 @@
 set -x
 
 # Install Samba
-sudo apt install -y samba samba-common-bin
+sudo apt-get install -y -qq samba samba-common-bin
 
 # Configure tnfs user & add Packer user to tnfs group
 sudo useradd -c 'tnfsd user' -U -m -d /tnfs -r tnfs 
 sudo usermod -a -G tnfs "$P_USERNAME"
 
 # Install tnfsd
-curl -sLo /usr/local/sbin/tnfsd "https://fujinet.online/firmware/tnfsd.linux64"
+sudo curl -sLo /usr/local/sbin/tnfsd "https://fujinet.online/firmware/tnfsd.linux64"
 sudo chmod +x /usr/local/sbin/tnfsd 
 
 # Populate Samba tnfs share config

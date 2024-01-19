@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -x
 
-sudo apt install -y xfce4
+sudo apt-get install -y -qq xfce4 xfce4-terminal
 sudo cp /tmp/wallpaper.png /etc/lightdm/login-logo.png 
 
 cat <<EOF | sudo tee /etc/lightdm/lightdm-gtk-greeter.conf

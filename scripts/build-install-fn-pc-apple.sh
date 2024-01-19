@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -x
 
-sudo apt install -y git python-is-python3 build-essential cmake libexpat-dev libmbedtls-dev python3-jinja2 python3-yaml
+sudo apt-get install -y -qq git python-is-python3 build-essential cmake libexpat-dev libmbedtls-dev python3-jinja2 python3-yaml
 
 FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
-INSTALL_PATH="$CODE_PATH/FujiNet-PC-Apple"
+INSTALL_PATH="$FN_PATH/FujiNet-PC-Apple"
 mkdir -p "$FN_PATH"
 cd "$FN_PATH"
 
@@ -16,9 +16,9 @@ cd "$FNPIO_PATH"
 ./build.sh -cp APPLE
 
 mkdir -p "$INSTALL_PATH"
-cp -r "$FN_PATH/build/*" "$INSTALL_PATH/"
+rsync -au "$FN_PATH/build/" "$INSTALL_PATH/"
 
-cat <<EOF | sudo tee /etc/system/systemd/fn-pc-atari.service 
+cat <<EOF | sudo tee /etc/systemd/system/fn-pc-atari.service 
 [Unit]
 Description=FujiNet PC for Apple
 After=remote-fs.target

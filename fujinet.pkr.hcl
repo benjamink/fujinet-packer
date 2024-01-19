@@ -46,16 +46,16 @@ source "virtualbox-iso" "fujinet" {
   iso_checksum      = "sha256:64d727dd5785ae5fcfd3ae8ffbede5f40cca96f1580aaa2820e8b99dae989d94"
   ssh_username      = local.username
   ssh_password      = "online"
-  ssh_wait_timeout  = "3600s"
+  ssh_wait_timeout  = "300s"
   boot_wait         = "10s"
   disk_size         = "10000"
   headless          = true
-  cpus              = "2"
-  memory            = "4096"
+  #cpus              = "2"
+  #memory            = "4096"
   output_directory  = "output-qemu"
   vm_name           = "fujinet-debian12"
   http_directory    = "http"
-  #guest_os_type     = "Debian_64"
+  guest_os_type     = "Debian_64"
   vrdp_bind_address = "0.0.0.0"
   vrdp_port_min     = 5900
   vrdp_port_max     = 5901
@@ -63,17 +63,17 @@ source "virtualbox-iso" "fujinet" {
     "<wait><esc><wait>",
     "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
   ]
-  vboxmanage = [
-    ["modifyvm", "{{.Name}}", "--memory", "4096"],
-    ["modifyvm", "{{.Name}}", "--cpus", "2"]
-  ]
+  #vboxmanage = [
+  #  ["modifyvm", "{{.Name}}", "--memory", "4096"],
+  #  ["modifyvm", "{{.Name}}", "--cpus", "2"]
+  #]
   shutdown_command = "echo 'online' | sudo -S shutdown -P now"
 }
 
 build {
   name = "fujinet-packer"
   sources = [
-    "source.virtualbox-iso.fujinet"
+    "source.qemu.fujinet"
   ]
 
   provisioner "file" {
@@ -89,9 +89,9 @@ build {
       "P_FN_PATH=/home/${local.username}/FujiNet"
     ]
     scripts = [
-      "scripts/tnfs-install.sh",
-      "scripts/user-setup.sh",
       "scripts/lightdm-greeter.sh",
+      "scripts/user-setup.sh",
+      "scripts/tnfs-install.sh",
       "scripts/install-wine.sh",
       "scripts/setup-fujinet-apps.sh",
       "scripts/build-install-fn-pc-apple.sh",
@@ -99,15 +99,5 @@ build {
       "scripts/install-altirra.sh",
       "scripts/install-applewin-linux.sh"
     ]
-  }
-
-  provisioner "file" {
-    source      = "files/user/${local.username}/desktop/"
-    destination = "/home/${local.username}/Desktop"
-  }
-
-  provisioner "file" {
-    source      = "files/user/initial-setup.sh"
-    destination = "/home/${local.username}/"
   }
 }

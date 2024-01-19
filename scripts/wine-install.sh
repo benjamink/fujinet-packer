@@ -2,4 +2,4 @@
 set -x 
 
 # Install wine
-sudo apt install -y wine playonlinux
+sudo apt-get install -y -qq wine playonlinux

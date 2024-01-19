@@ -4,14 +4,14 @@ set -x
 INSTALL_PATH="$P_FN_PATH/Altirra"
 NETSIO_DEV_PATH="Z:$(echo "$INSTALL_PATH/netsio.atdevice" | sed 's#/#\\\\\\\\#g')"
 
-sudo apt install -y git
+sudo apt-get install -y -qq git
 
 # Clone fujinet-emulator-bridge
 mkdir -p "$INSTALL_PATH"
 cd "$INSTALL_PATH"
 git clone https://github.com/FujiNetWIFI/fujinet-emulator-bridge emulator
 
-cat <<EOF | tee /etc/system/systemd/fn-emulator-bridge.service
+cat <<EOF | sudo tee /etc/system/systemd/fn-emulator-bridge.service
 [Unit]
 Description=FujiNet PC for Atari Bridge
 After=remote-fs.target

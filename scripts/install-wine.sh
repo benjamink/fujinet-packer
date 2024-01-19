@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -x
 
-sudo apt install -y wine
+sudo apt-get install -y -qq wine
 
 WINEPREFIX="/home/$P_USERNAME/Wine"
 
