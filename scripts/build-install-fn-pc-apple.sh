@@ -26,9 +26,9 @@ After=syslog.target
 
 [Service]
 WorkingDirectory=$INSTALL_PATH
-User=vcf
-Group=vcf
-ExecStart=$INSTALL_PATH/run-fujinet
+User=$P_USERNAME
+Group=$P_USERNAME
+ExecStart=$INSTALL_PATH/fujinet
 
 [Install]
 WantedBy=multi-user.target

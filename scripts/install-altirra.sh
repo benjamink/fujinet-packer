@@ -2,7 +2,7 @@
 set -x
 
 INSTALL_PATH="$P_FN_PATH/Altirra"
-NETSIO_DEV_PATH="Z:$(echo "$INSTALL_PATH/netsio.atdevice" | sed 's#/#\\\\\\\\#g')"
+NETSIO_DEV_PATH="Z:$(echo "$INSTALL_PATH/emulator/altirra-custom-device/netsio.atdevice" | sed 's#/#\\\\\\\\#g')"
 
 sudo apt-get install -y -qq git
 
@@ -18,7 +18,7 @@ After=remote-fs.target
 After=syslog.target
 
 [Service]
-WorkingDirectory=$INSTALL_PATH/fujinet-emulator-bridge/fujinet-bridge
+WorkingDirectory=$INSTALL_PATH/emulator/fujinet-bridge
 User=$P_USERNAME
 Group=$P_USERNAME
 ExecStart=/usr/bin/python -m netsiohub
@@ -59,7 +59,7 @@ EOF
 #[User\Software\virtualdub.org\Altirra\Saved filespecs]
 #"63756476" = "$(echo "${NETSIO_DEV_PATH%\\*}" | sed 's#\\\\#\\#g')"
 
-echo <<EOF > "$INSTALL_PATH/start-altirra.sh"
+cat <<EOF > "$INSTALL_PATH/start-altirra.sh"
 #!/usr/bin/env bash 
 
 sudo systemctl start fn-pc-atari
@@ -69,7 +69,7 @@ EOF
 
 chmod +x "$INSTALL_PATH/start-altirra.sh"
 
-echo <<EOF > "/home/$P_USERNAME/Desktop/Altirra.desktop"
+cat <<EOF > "/home/$P_USERNAME/Desktop/Altirra.desktop"
 [Desktop Entry]
 Encoding=UTF-8
 Name=Altirra
@@ -78,3 +78,5 @@ Type=Application
 Exec=$INSTALL_PATH/start-altirra.sh
 Icon=
 EOF
+
+chmod +x "/home/$P_USERNAME/Desktop/Altirra.desktop"

@@ -25,7 +25,7 @@ cat <<EOF > "/home/$P_USERNAME/.applewin/applewin.conf"
 Card type=17
 
 # FujiNet-PC
-[Configuration\Slow 5]
+[Configuration\Slot 7]
 Card type=25
 
 [Configuration\Slot Auxiliary]
@@ -63,3 +63,5 @@ Type=Application
 Exec=$INSTALL_PATH/start-applewin.sh
 Icon=/usr/local/share/applewin/resource/APPLEWIN.ICO
 EOF
+
+chmod +x "/home/$P_USERNAME/Desktop/AppleWin.desktop"

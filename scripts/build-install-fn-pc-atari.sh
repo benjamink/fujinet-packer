@@ -23,13 +23,13 @@ cat <<EOF | sudo tee /etc/systemd/system/fn-pc-atari.service
 Description=FujiNet PC for Atari
 After=remote-fs.target
 After=syslog.target
-Requires = fn-pc-atari-bridge.service
+Requires = fn-emulator-bridge.service
 
 [Service]
 WorkingDirectory=$INSTALL_PATH
-User=vcf
-Group=vcf
-ExecStart=$INSTALL_PATH/run-fujinet
+User=$P_USERNAME
+Group=$P_USERNAME
+ExecStart=$INSTALL_PATH/fujinet
 
 [Install]
 WantedBy=multi-user.target
