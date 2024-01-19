@@ -27,6 +27,9 @@ source "qemu" "fujinet" {
   disk_size        = "10000"
   format           = "qcow2"
   headless         = true
+  cpus             = 4
+  accelerator      = "kvm"
+  memory           = 8192
   net_device       = "virtio-net"
   output_directory = "output-qemu"
   vm_name          = "debian-12-qemu.qcow2"
@@ -39,17 +42,18 @@ source "qemu" "fujinet" {
     ["-m", "8192M"],
     ["-smp", "2"]
   ]
+  shutdown_command = "echo 'online' | sudo -S shutdown -P now"
 }
 
 source "virtualbox-iso" "fujinet" {
-  iso_url           = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.4.0-amd64-netinst.iso"
-  iso_checksum      = "sha256:64d727dd5785ae5fcfd3ae8ffbede5f40cca96f1580aaa2820e8b99dae989d94"
-  ssh_username      = local.username
-  ssh_password      = "online"
-  ssh_wait_timeout  = "300s"
-  boot_wait         = "10s"
-  disk_size         = "10000"
-  headless          = true
+  iso_url          = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.4.0-amd64-netinst.iso"
+  iso_checksum     = "sha256:64d727dd5785ae5fcfd3ae8ffbede5f40cca96f1580aaa2820e8b99dae989d94"
+  ssh_username     = local.username
+  ssh_password     = "online"
+  ssh_wait_timeout = "300s"
+  boot_wait        = "10s"
+  disk_size        = "10000"
+  headless         = true
   #cpus              = "2"
   #memory            = "4096"
   output_directory  = "output-qemu"
@@ -86,7 +90,9 @@ build {
       "DEBIAN_FRONTEND=noninteractive",
       "P_USERNAME=${local.username}",
       "P_ALTIRRA_ZIP_URL=${local.altirra_zip_url}",
-      "P_FN_PATH=/home/${local.username}/FujiNet"
+      "P_FN_PATH=/home/${local.username}/FujiNet",
+      "CMAKE_COLOR_DIAGNOSTICS=OFF",
+      "PLATFORMIO_NO_ANSI=True"
     ]
     scripts = [
       "scripts/lightdm-greeter.sh",
@@ -97,7 +103,8 @@ build {
       "scripts/build-install-fn-pc-apple.sh",
       "scripts/build-install-fn-pc-atari.sh",
       "scripts/install-altirra.sh",
-      "scripts/install-applewin-linux.sh"
+      "scripts/install-applewin-linux.sh",
+      "scripts/firstboot-setup.sh"
     ]
   }
 }

@@ -16,9 +16,9 @@ cd "$FNPIO_PATH"
 ./build.sh -cp APPLE
 
 mkdir -p "$INSTALL_PATH"
-rsync -au "$FN_PATH/build/" "$INSTALL_PATH/"
+rsync -au "$FNPIO_PATH/build/" "$INSTALL_PATH/"
 
-cat <<EOF | sudo tee /etc/systemd/system/fn-pc-atari.service 
+cat <<EOF | sudo tee /etc/systemd/system/fn-pc-apple.service 
 [Unit]
 Description=FujiNet PC for Apple
 After=remote-fs.target

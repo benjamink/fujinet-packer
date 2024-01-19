@@ -44,7 +44,7 @@ Monochrome Color=12632256
 Video Refresh Rate=2
 EOF
 
-echo <<EOF > "$INSTALL_PATH/start-applewin.sh"
+cat <<EOF > "$INSTALL_PATH/start-applewin.sh"
 #!/usr/bin/env bash 
 
 sudo systemctl start fn-pc-apple
@@ -52,14 +52,14 @@ sleep 10
 /usr/local/bin/sa2 --log
 EOF
 
-chmod +x "$INSTALL_PATH/start-altirra.sh"
+chmod +x "$INSTALL_PATH/start-applewin.sh"
 
-echo <<EOF > "/home/$P_USERNAME/Desktop/AppleWin.desktop"
+cat <<EOF > "/home/$P_USERNAME/Desktop/AppleWin.desktop"
 [Desktop Entry]
 Encoding=UTF-8
 Name=AppleWin
 Comment=AppleWin for Linux
 Type=Application
 Exec=$INSTALL_PATH/start-applewin.sh
-Icon=
+Icon=/usr/local/share/applewin/resource/APPLEWIN.ICO
 EOF

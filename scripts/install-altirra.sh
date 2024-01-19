@@ -11,7 +11,7 @@ mkdir -p "$INSTALL_PATH"
 cd "$INSTALL_PATH"
 git clone https://github.com/FujiNetWIFI/fujinet-emulator-bridge emulator
 
-cat <<EOF | sudo tee /etc/system/systemd/fn-emulator-bridge.service
+cat <<EOF | sudo tee /etc/systemd/system/fn-emulator-bridge.service
 [Unit]
 Description=FujiNet PC for Atari Bridge
 After=remote-fs.target
