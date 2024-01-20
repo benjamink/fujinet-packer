@@ -25,7 +25,7 @@ cat <<EOF > "/home/$P_USERNAME/.applewin/applewin.conf"
 Card type=17
 
 # FujiNet-PC
-[Configuration\Slot 7]
+[Configuration\Slot 5]
 Card type=25
 
 [Configuration\Slot Auxiliary]

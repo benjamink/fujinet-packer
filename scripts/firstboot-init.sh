@@ -41,5 +41,5 @@ ExecStart=/usr/local/sbin/firstboot-setup.sh
 WantedBy=multi-user.target
 EOF
 
-sudo systemctl daemon-reload 
-sudo systemctl enable firstboot.service
+systemctl daemon-reload 
+systemctl enable firstboot.service

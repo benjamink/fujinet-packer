@@ -16,7 +16,7 @@ cd "$FNPIO_PATH"
 ./build.sh -cp APPLE
 
 mkdir -p "$INSTALL_PATH"
-rsync -au "$FNPIO_PATH/build/" "$INSTALL_PATH/"
+rsync -au "$FNPIO_PATH/build/dist" "$INSTALL_PATH/"
 
 cat <<EOF | sudo tee /etc/systemd/system/fn-pc-apple.service 
 [Unit]
@@ -28,7 +28,7 @@ After=syslog.target
 WorkingDirectory=$INSTALL_PATH
 User=$P_USERNAME
 Group=$P_USERNAME
-ExecStart=$INSTALL_PATH/fujinet
+ExecStart=$INSTALL_PATH/run-fujinet
 
 [Install]
 WantedBy=multi-user.target
