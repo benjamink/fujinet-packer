@@ -3,6 +3,7 @@ set -x
 
 INSTALL_PATH="$P_FN_PATH/Altirra"
 NETSIO_DEV_PATH="Z:$(echo "$INSTALL_PATH/emulator/altirra-custom-device/netsio.atdevice" | sed 's#/#\\\\\\\\#g')"
+LAUNCHER_PATH="/home/$P_USERNAME/Desktop/Altirra.desktop"
 
 sudo apt-get install -y -qq git
 
@@ -55,14 +56,11 @@ cat <<EOF > "$INSTALL_PATH/Altirra.ini"
 "custom" = "{\"hotreload\":false,\"path\":\"$NETSIO_DEV_PATH\"}"
 EOF
 
-# This is probably not needed in the Altirra.ini
-#[User\Software\virtualdub.org\Altirra\Saved filespecs]
-#"63756476" = "$(echo "${NETSIO_DEV_PATH%\\*}" | sed 's#\\\\#\\#g')"
-
 cat <<EOF > "$INSTALL_PATH/start-altirra.sh"
 #!/usr/bin/env bash 
 
 sudo systemctl start fn-pc-atari
+sleep 2
 wine $INSTALL_PATH/Altirra64.exe /portable
 
 sudo systemctl stop fn-pc-atari 
@@ -71,7 +69,7 @@ EOF
 
 chmod +x "$INSTALL_PATH/start-altirra.sh"
 
-cat <<EOF > "/home/$P_USERNAME/Desktop/Altirra.desktop"
+cat <<EOF > "$LAUNCHER_PATH"
 [Desktop Entry]
 Encoding=UTF-8
 Name=Altirra
@@ -81,4 +79,5 @@ Exec=$INSTALL_PATH/start-altirra.sh
 Icon=/home/$P_USERNAME/Pictures/altirra-logo.png
 EOF
 
-chmod +x "/home/$P_USERNAME/Desktop/Altirra.desktop"
+chmod +x "$LAUNCHER_PATH"
+gio set -f string "$LAUNCHER_PATH" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH" | awk '{print $1}')"

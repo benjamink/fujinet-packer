@@ -3,6 +3,7 @@ set -x
 
 sudo apt-get install -y -qq git build-essential cmake libghc-zlib-dev libslirp-dev libminizip-dev libpcap-dev libyaml-dev libboost-all-dev libsdl2-image-dev
 
+LAUNCHER_PATH="/home/$P_USERNAME/Desktop/AppleWin.desktop"
 FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 INSTALL_PATH="$FN_PATH/AppleWin"
 mkdir -p "$FN_PATH"
@@ -54,6 +55,7 @@ then
 fi 
 
 sudo systemctl start fn-pc-apple
+sleep 2
 /usr/local/bin/sa2 --log \$LOAD_DISK
 
 while true
@@ -69,7 +71,7 @@ EOF
 
 chmod +x "$INSTALL_PATH/start-applewin.sh"
 
-cat <<EOF > "/home/$P_USERNAME/Desktop/AppleWin.desktop"
+cat <<EOF > "$LAUNCHER_PATH"
 [Desktop Entry]
 Encoding=UTF-8
 Name=AppleWin
@@ -79,4 +81,5 @@ Exec=$INSTALL_PATH/start-applewin.sh
 Icon=/usr/local/share/applewin/resource/APPLEWIN.ICO
 EOF
 
-chmod +x "/home/$P_USERNAME/Desktop/AppleWin.desktop"
+chmod +x "$LAUNCHER_PATH"
+gio set -f string "$LAUNCHER_PATH" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH" | awk '{print $1}')"
