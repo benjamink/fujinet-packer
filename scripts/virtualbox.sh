@@ -4,9 +4,12 @@ set -x
 sudo mkdir -p /tmp/vbox
 sudo mount -o loop "/home/$P_USERNAME/VBoxGuestAdditions.iso" /tmp/vbox 
 
-sudo apt-get install -qq -y build-essential dkms bzip2 tar "linux-headers-\$(uname -r)"
+sudo mount
+sudo ls -la /tmp/vbox
 
-sudo /tmp/vbox/VBoxGuestAdditions.run --nox11 || true 
+sudo apt-get install -qq -y build-essential dkms bzip2 tar "linux-headers-$(uname -r)"
+
+sudo sh /tmp/vbox/VBoxLinuxAdditions.run --nox11 || true 
 
 if ! sudo modinfo vboxsf >/dev/null 2>&1
 then
