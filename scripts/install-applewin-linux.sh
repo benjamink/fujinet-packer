@@ -82,4 +82,4 @@ Icon=/usr/local/share/applewin/resource/APPLEWIN.ICO
 EOF
 
 chmod +x "$LAUNCHER_PATH"
-gio set -f string "$LAUNCHER_PATH" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH" | awk '{print $1}')"
+gio set -t string "$LAUNCHER_PATH" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH" | awk '{print $1}')"
