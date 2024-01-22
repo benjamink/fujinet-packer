@@ -92,8 +92,20 @@ build {
   ]
 
   provisioner "file" {
-    source      = "files/wallpaper.png"
+    source      = "files/FujiNet-Logo-Wallpaper1.png"
     destination = "/tmp/wallpaper.png"
+  }
+
+  /*
+  provisioner "file" {
+    source      = "files/VCF-Logo-Wallpaper1.png"
+    destination = "/tmp/wallpaper.png"
+  }
+  */
+
+  provisioner "file" {
+    source      = "files/FujiNet-Logo-NoText.png"
+    destination = "/tmp/login-icon.png"
   }
 
   provisioner "shell" {
@@ -107,7 +119,8 @@ build {
     ]
     scripts = [
       "scripts/virtualbox.sh",
-      "scripts/lightdm-greeter.sh",
+      "scripts/lightdm-greeter-fn.sh",
+      #"scripts/lightdm-greeter-vcf.sh",
       "scripts/user-setup.sh",
       "scripts/tnfs-install.sh",
       "scripts/install-wine.sh",
@@ -119,4 +132,10 @@ build {
       "scripts/firstboot-setup.sh"
     ]
   }
+
+  provisioner "file" {
+    source      = "files/altirra-logo.png"
+    destination = "/home/${local.username}/Pictures/altirra-logo.png"
+  }
+
 }

@@ -78,7 +78,7 @@ Name=Altirra
 Comment=Altirra in Wine
 Type=Application
 Exec=$INSTALL_PATH/start-altirra.sh
-Icon=
+Icon=/home/$P_USERNAME/Pictures/altirra-logo.png
 EOF
 
 chmod +x "/home/$P_USERNAME/Desktop/Altirra.desktop"
