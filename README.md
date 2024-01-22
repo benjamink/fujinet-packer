@@ -25,6 +25,15 @@ After booting & logging into the VM the first time VirtualBox will display a not
 
 ![VirtualBox Gues Additions Version](media/vbox-guest-additions-notice.png)
 
+## Pre-configured Items
+
+- Altirra - run via Wine - Starts the FujiNet-PC (`fn-pc-atari.service`) & FujiNet Emulator Bridge (`fn-emulator-bridge.service`) services automatically when started from the desktop launcher icon
+- AppleWin for Linux - Starts the FujiNet-PC (`fn-pc-apple.service`) service automatically when started from the desktop launcher icon
+- [fujinet-platformio](https://github.com/FujiNetWIFI/fujinet-platformio) - Git repository cloned to `$HOME/FujiNet/fujinet-platformio`
+- [fujinet-apps](https://github.com/FujiNetWIFI/fujinet-apps) - Git repository cloned to `$HOME/FujiNet/fujinet-apps`
+
+See the [FujiNet Wiki](https://github.com/FujiNetWIFI/fujinet-platformio/wiki) for more details on using FujiNet.
+
 ## Building the VM with Packer
 
 >**_NOTE:_** This has yet to be written.
