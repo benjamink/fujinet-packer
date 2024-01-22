@@ -80,4 +80,4 @@ Icon=/home/$P_USERNAME/Pictures/altirra-logo.png
 EOF
 
 chmod +x "$LAUNCHER_PATH"
-gio set -f string "$LAUNCHER_PATH" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH" | awk '{print $1}')"
+gio set -t string "$LAUNCHER_PATH" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH" | awk '{print $1}')"
