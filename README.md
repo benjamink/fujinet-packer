@@ -12,6 +12,8 @@ The results of building the Packer configuration is a VirtualBox OVA appliance V
 
 One item that may be desirable to configure before booting the VM is setting the scaling of the display.  This will depend on the resolution of the screen you're running the VM on & personal preferences.  Setting this scaling configuration to 200% works well on high-resolution/high-dpi screens: 
 
+![Setting Screen Scaling](media/fujinet-vm-adjust-display-scaling.png)
+
 ## Running the VM
 
 The default authentication for the built VM are as follows: 
@@ -20,6 +22,8 @@ The default authentication for the built VM are as follows:
 - Password: `online`
 
 After booting & logging into the VM the first time VirtualBox will display a notice if the version of VirtualBox is newer than the Guest Additions installed in the VM.  Currently the VM is built with VirtualBox version 6.1 while the current version of VirtualBox is 7.0.  If the following notice appears it can be safely ignored by either clicking on it or waiting for it to disappear automatically.  
+
+![VirtualBox Gues Additions Version](media/vbox-guest-additions-notice.png)
 
 ## Building the VM with Packer
 
