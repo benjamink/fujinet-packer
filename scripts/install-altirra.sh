@@ -5,7 +5,7 @@ INSTALL_PATH="$P_FN_PATH/Altirra"
 NETSIO_DEV_PATH="Z:$(echo "$INSTALL_PATH/emulator/altirra-custom-device/netsio.atdevice" | sed 's#/#\\\\\\\\#g')"
 LAUNCHER_PATH="/home/$P_USERNAME/Desktop/Altirra.desktop"
 
-sudo apt-get install -y -qq git
+sudo apt-get install -y -qq git libglib2.0-bin
 
 # Clone fujinet-emulator-bridge
 mkdir -p "$INSTALL_PATH"
