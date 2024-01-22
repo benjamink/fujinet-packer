@@ -63,8 +63,10 @@ cat <<EOF > "$INSTALL_PATH/start-altirra.sh"
 #!/usr/bin/env bash 
 
 sudo systemctl start fn-pc-atari
-sleep 10
 wine $INSTALL_PATH/Altirra64.exe /portable
+
+sudo systemctl stop fn-pc-atari 
+sudo systemctl stop fn-emulator-bridge
 EOF
 
 chmod +x "$INSTALL_PATH/start-altirra.sh"

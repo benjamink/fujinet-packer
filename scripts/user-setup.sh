@@ -19,6 +19,18 @@ cat <<EOF | sudo tee /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="4"/>
           <property name="last-image" type="string" value="/home/$P_USERNAME/Pictures/wallpaper.png"/>
+          <property name="rgba1" type="array">
+            <value type="double" value="0"/>
+            <value type="double" value="0"/>
+            <value type="double" value="0"/>
+            <value type="double" value="1"/>
+          </property
+          <property name="rgba2" type="array">
+            <value type="double" value="0"/>
+            <value type="double" value="0"/>
+            <value type="double" value="0"/>
+            <value type="double" value="1"/>
+          </property
         </property>
       </property>
     </property>

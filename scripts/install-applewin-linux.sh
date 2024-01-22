@@ -47,9 +47,24 @@ EOF
 cat <<EOF > "$INSTALL_PATH/start-applewin.sh"
 #!/usr/bin/env bash 
 
+LOAD_DISK=""
+if [[ -n "\$1" ]]
+then
+  LOAD_DISK="-1 \$1"
+fi 
+
 sudo systemctl start fn-pc-apple
-sleep 10
-/usr/local/bin/sa2 --log
+/usr/local/bin/sa2 --log \$LOAD_DISK
+
+while true
+do 
+  if ! pgrep -lf sa2 
+  then 
+    sudo systemctl stop fn-pc-apple 
+    exit 0 
+  fi 
+  sleep 1 
+done 
 EOF
 
 chmod +x "$INSTALL_PATH/start-applewin.sh"
