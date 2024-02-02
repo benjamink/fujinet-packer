@@ -26,7 +26,7 @@ cat <<EOF > "/home/$P_USERNAME/.applewin/applewin.conf"
 Card type=17
 
 # FujiNet-PC
-[Configuration\Slot 5]
+[Configuration\Slot 7]
 Card type=25
 
 [Configuration\Slot Auxiliary]
@@ -74,8 +74,8 @@ chmod +x "$INSTALL_PATH/start-applewin.sh"
 cat <<EOF > "$LAUNCHER_PATH/AppleWin.desktop"
 [Desktop Entry]
 Encoding=UTF-8
-Name=AppleWin
-Comment=AppleWin for Linux
+Name=FujiNet AppleWin
+Comment=FujiNet connected to AppleWin for Linux
 Type=Application
 Exec=$INSTALL_PATH/start-applewin.sh
 Icon=/usr/local/share/applewin/resource/APPLEWIN.ICO
@@ -83,16 +83,3 @@ EOF
 
 chmod +x "$LAUNCHER_PATH/AppleWin.desktop"
 gio set -t string "$LAUNCHER_PATH/AppleWin.desktop" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH/AppleWin.desktop" | awk '{print $1}')"
-
-cat <<EOF > "$LAUNCHER_PATH/FujiNet-AppleWin.desktop"
-[Desktop Entry]
-Encoding=UTF-8
-Name=Fujinet AppleWin
-Comment=FujiNet connected AppleWin for Linux
-Type=Application
-Exec=$INSTALL_PATH/start-applewin.sh $FN_PATH/fujinet-apps/apple-tools/clean.po
-Icon=/usr/local/share/applewin/resource/APPLEWIN.ICO
-EOF
-
-chmod +x "$LAUNCHER_PATH/FujiNet-AppleWin.desktop"
-gio set -t string "$LAUNCHER_PATH/FujiNet-AppleWin.desktop" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH/FujiNet-AppleWin.desktop" | awk '{print $1}')"

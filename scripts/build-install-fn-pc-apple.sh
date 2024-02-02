@@ -5,17 +5,17 @@ sudo apt-get install -y -qq git python-is-python3 build-essential cmake libexpat
 
 FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 INSTALL_PATH="$FN_PATH/FujiNet-PC-Apple"
-mkdir -p "$FN_PATH"
+mkdir -p "$INSTALL_PATH"
 cd "$FN_PATH"
 
 git clone https://github.com/FujiNetWIFI/fujinet-platformio
 
 FNPIO_PATH="$FN_PATH/fujinet-platformio"
+mkdir -p "$FNPIO_PATH/build"
 cd "$FNPIO_PATH" 
 
 ./build.sh -cp APPLE
 
-mkdir -p "$INSTALL_PATH"
 rsync -au "$FNPIO_PATH/build/dist/" "$INSTALL_PATH/"
 
 cat <<EOF | sudo tee /etc/systemd/system/fn-pc-apple.service 
