@@ -29,7 +29,7 @@ Requires = fn-emulator-bridge.service
 WorkingDirectory=$INSTALL_PATH
 User=$P_USERNAME
 Group=$P_USERNAME
-ExecStart=$INSTALL_PATH/run-fujinet
+ExecStart=$INSTALL_PATH/run-fujinet -u 0.0.0.0:8000
 Restart=always
 
 [Install]
