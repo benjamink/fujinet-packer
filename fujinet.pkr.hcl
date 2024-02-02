@@ -11,6 +11,12 @@ packer {
   }
 }
 
+variable "vm_version" {
+  type        = string
+  description = "Version for the built VM appliance"
+  default     = "test"
+}
+
 locals {
   username        = "fujinet"
   altirra_zip_url = "https://virtualdub.org/downloads/Altirra-4.20.zip"
@@ -50,7 +56,7 @@ source "virtualbox-iso" "fujinet" {
     "--manifest",
     "--vsys", "0",
     "--description", "FujiNet Development VM",
-    "--version", "0.2.0"
+    "--version", var.vm_version
   ]
   format                    = "ova"
   iso_url                   = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.4.0-amd64-netinst.iso"

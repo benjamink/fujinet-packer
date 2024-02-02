@@ -23,12 +23,14 @@ WorkingDirectory=$INSTALL_PATH/emulator/fujinet-bridge
 User=$P_USERNAME
 Group=$P_USERNAME
 ExecStart=/usr/bin/python -m netsiohub
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 sudo systemctl daemon-reload
+sudo systemctl enable fn-emulator-bridge.service
 
 # Install Altirra
 curl -sLo altirra.zip "$P_ALTIRRA_ZIP_URL"
@@ -56,26 +58,13 @@ cat <<EOF > "$INSTALL_PATH/Altirra.ini"
 "custom" = "{\"hotreload\":false,\"path\":\"$NETSIO_DEV_PATH\"}"
 EOF
 
-cat <<EOF > "$INSTALL_PATH/start-altirra.sh"
-#!/usr/bin/env bash 
-
-sudo systemctl start fn-pc-atari
-sleep 2
-wine $INSTALL_PATH/Altirra64.exe /portable
-
-sudo systemctl stop fn-pc-atari 
-sudo systemctl stop fn-emulator-bridge
-EOF
-
-chmod +x "$INSTALL_PATH/start-altirra.sh"
-
 cat <<EOF > "$LAUNCHER_PATH"
 [Desktop Entry]
 Encoding=UTF-8
 Name=Altirra
 Comment=Altirra in Wine
 Type=Application
-Exec=$INSTALL_PATH/start-altirra.sh
+Exec=wine $INSTALL_PATH/Altirra64.exe /portable
 Icon=/home/$P_USERNAME/Pictures/altirra-logo.png
 EOF
 

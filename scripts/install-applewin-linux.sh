@@ -54,19 +54,7 @@ then
   LOAD_DISK="-1 \$1"
 fi 
 
-sudo systemctl start fn-pc-apple
-sleep 2
 /usr/local/bin/sa2 --log \$LOAD_DISK
-
-while true
-do 
-  if ! pgrep -lf sa2 
-  then 
-    sudo systemctl stop fn-pc-apple 
-    exit 0 
-  fi 
-  sleep 1 
-done 
 EOF
 
 chmod +x "$INSTALL_PATH/start-applewin.sh"

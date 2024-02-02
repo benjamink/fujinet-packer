@@ -30,9 +30,11 @@ WorkingDirectory=$INSTALL_PATH
 User=$P_USERNAME
 Group=$P_USERNAME
 ExecStart=$INSTALL_PATH/run-fujinet
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 sudo systemctl daemon-reload
+sudo systemctl enable fn-pc-atari.service
