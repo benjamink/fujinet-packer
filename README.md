@@ -4,7 +4,7 @@ This repository contains Packer configuration that will build a VirtualBox VM in
 
 ## Downloading the VM
 
-Currently the VM can be downloaded from [Google Drive](https://drive.google.com/file/d/1HVyT39eVp2tHCJGq065lAUCq1vcOfEHP/view?usp=drive_link) (this is approximately 3.6GB in size).
+[Download VirtualMachine OVA](https://mega.nz/folder/4L03hKRL#L1GOblpv8xbHROaKIPb1xg) (this is approximately 3.6GB in size).
 
 ## Importing the VM
 
