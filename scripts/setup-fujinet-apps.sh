@@ -8,3 +8,6 @@ mkdir -p "$CODE_PATH"
 cd "$CODE_PATH" 
 
 git clone https://github.com/FujiNetWIFI/fujinet-apps
+
+cd "$CODE_PATH/fujinet-apps/apple-tools"
+./mk-bitsy.sh clean.po CLEAN

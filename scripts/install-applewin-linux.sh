@@ -3,7 +3,7 @@ set -x
 
 sudo apt-get install -y -qq git build-essential cmake libghc-zlib-dev libslirp-dev libminizip-dev libpcap-dev libyaml-dev libboost-all-dev libsdl2-image-dev libglib2.0-bin
 
-LAUNCHER_PATH="/home/$P_USERNAME/Desktop/AppleWin.desktop"
+LAUNCHER_PATH="/home/$P_USERNAME/Desktop"
 FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 INSTALL_PATH="$FN_PATH/AppleWin"
 mkdir -p "$FN_PATH"
@@ -71,7 +71,7 @@ EOF
 
 chmod +x "$INSTALL_PATH/start-applewin.sh"
 
-cat <<EOF > "$LAUNCHER_PATH"
+cat <<EOF > "$LAUNCHER_PATH/AppleWin.desktop"
 [Desktop Entry]
 Encoding=UTF-8
 Name=AppleWin
@@ -81,5 +81,18 @@ Exec=$INSTALL_PATH/start-applewin.sh
 Icon=/usr/local/share/applewin/resource/APPLEWIN.ICO
 EOF
 
-chmod +x "$LAUNCHER_PATH"
-gio set -t string "$LAUNCHER_PATH" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH" | awk '{print $1}')"
+chmod +x "$LAUNCHER_PATH/AppleWin.desktop"
+gio set -t string "$LAUNCHER_PATH/AppleWin.desktop" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH/AppleWin.desktop" | awk '{print $1}')"
+
+cat <<EOF > "$LAUNCHER_PATH/FujiNet-AppleWin.desktop"
+[Desktop Entry]
+Encoding=UTF-8
+Name=Fujinet AppleWin
+Comment=FujiNet connected AppleWin for Linux
+Type=Application
+Exec=$INSTALL_PATH/start-applewin.sh $FN_PATH/fujinet-apps/apple-tools/clean.po
+Icon=/usr/local/share/applewin/resource/APPLEWIN.ICO
+EOF
+
+chmod +x "$LAUNCHER_PATH/FujiNet-AppleWin.desktop"
+gio set -t string "$LAUNCHER_PATH/FujiNet-AppleWin.desktop" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH/FujiNet-AppleWin.desktop" | awk '{print $1}')"
