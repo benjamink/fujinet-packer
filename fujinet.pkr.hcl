@@ -50,7 +50,7 @@ source "virtualbox-iso" "fujinet" {
     "--manifest",
     "--vsys", "0",
     "--description", "FujiNet Development VM",
-    "--version", "0.1.0"
+    "--version", "0.2.0"
   ]
   format                    = "ova"
   iso_url                   = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.4.0-amd64-netinst.iso"
