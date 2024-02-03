@@ -70,7 +70,7 @@ source "virtualbox-iso" "fujinet" {
   cpus                      = "4"
   memory                    = "8192"
   output_directory          = "output-qemu"
-  vm_name                   = "fujinet-debian12"
+  vm_name                   = "fujinet-debian12-vbox-${var.vm_version}"
   http_directory            = "http"
   guest_os_type             = "Debian_64"
   iso_interface             = "sata"
