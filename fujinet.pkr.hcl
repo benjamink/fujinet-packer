@@ -69,8 +69,8 @@ source "virtualbox-iso" "fujinet" {
   headless                  = true
   cpus                      = "4"
   memory                    = "8192"
-  output_directory          = "output-qemu"
-  vm_name                   = "fujinet-debian12-vbox-${var.vm_version}"
+  output_directory          = "output"
+  vm_name                   = "fujinet-debian12-vbox"
   http_directory            = "http"
   guest_os_type             = "Debian_64"
   iso_interface             = "sata"
@@ -125,6 +125,7 @@ build {
     ]
     scripts = [
       "scripts/virtualbox.sh",
+      "scripts/fujinet-sudoers.sh",
       "scripts/lightdm-greeter-fn.sh",
       #"scripts/lightdm-greeter-vcf.sh",
       "scripts/user-setup.sh",

@@ -29,6 +29,7 @@ WorkingDirectory=$INSTALL_PATH
 User=$P_USERNAME
 Group=$P_USERNAME
 ExecStart=$INSTALL_PATH/run-fujinet -u 0.0.0.0:8001
+KillSignal=9
 Restart=always
 
 [Install]

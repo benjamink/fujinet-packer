@@ -26,5 +26,5 @@ PACKER_DEBUG=1 packer build -var="vm_version=$VERSION" -force -color=false -mach
 
 if [[ $LOCAL_ONLY != "true" ]]
 then 
-  mega-put "output-qemu/fujinet-debian12-vbox-$VERSION.ova" "FujiNet/VirtualMachine/fujinet-debian12-vbox-$VERSION.ova"
+  mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VirtualMachine/fujinet-debian12-vbox.ova"
 fi
