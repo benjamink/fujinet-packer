@@ -18,6 +18,9 @@ cd "$FNPIO_PATH"
 
 rsync -au "$FNPIO_PATH/build/dist/" "$INSTALL_PATH/"
 
+# Temporary fix to shebang to support functions - BK 2024-02-05
+sed -i 's@#!/bin/sh@!#/usr/bin/env bash@' "$INSTALL_PATH/run-fujinet"
+
 cat <<EOF | sudo tee /etc/systemd/system/fn-pc-apple.service 
 [Unit]
 Description=FujiNet PC for Apple

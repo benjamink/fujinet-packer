@@ -56,15 +56,15 @@ fi
 
 /usr/local/bin/sa2 --log \$LOAD_DISK
 
-#while true
-#do 
-#  if ! pgrep -lf sa2 
-#  then 
-#    sudo systemctl restart fn-pc-apple 
-#    exit 0 
-#  fi 
-#  sleep 1 
-#done 
+while true
+do 
+  if ! pgrep -lf sa2 
+  then 
+    sudo systemctl restart fn-pc-apple 
+    exit 0 
+  fi 
+  sleep 1 
+done 
 EOF
 
 chmod +x "$INSTALL_PATH/start-applewin.sh"

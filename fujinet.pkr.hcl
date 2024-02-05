@@ -86,7 +86,8 @@ source "virtualbox-iso" "fujinet" {
   ]
   vboxmanage = [
     ["modifyvm", "{{.Name}}", "--memory", "4096"],
-    ["modifyvm", "{{.Name}}", "--cpus", "2"]
+    ["modifyvm", "{{.Name}}", "--cpus", "2"],
+    ["setextradata", "{{.Name}}", "GUI/ScaleFactor", "2"]
   ]
   shutdown_command = "echo 'online' | sudo -S shutdown -P now"
 }
