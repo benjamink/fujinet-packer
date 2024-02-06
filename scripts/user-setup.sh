@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 set -x
 
+sudo apt-get install -y epiphany-browser 
+
 mkdir "/home/$P_USERNAME/Desktop"
 mkdir "/home/$P_USERNAME/Pictures"
 mkdir "/home/$P_USERNAME/Downloads"
 mkdir "/home/$P_USERNAME/Documents"
+mkdir -p "${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 
 cp /tmp/wallpaper.png "/home/$P_USERNAME/Pictures/wallpaper.png"
 
