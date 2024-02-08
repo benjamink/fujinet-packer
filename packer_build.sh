@@ -25,9 +25,14 @@ do
   esac
 done
 
+if [[ "$VERSION" != "test" ]]
+then 
+  git tag "$VERSION" 
+fi 
+
 if [[ "$COPY_ONLY" != "true" ]]
 then
-  PACKER_DEBUG=1 packer build -var="vm_version=$VERSION" -force -color=false -machine-readable -on-error=clean . | tee packer.out
+  PACKER_DEBUG=1 packer build -var="vm_version=$VERSION" -force -color=false -machine-readable -on-error=cleanup . | tee packer.out
 fi
 
 if [[ "$LOCAL_ONLY" != "true" ]]
