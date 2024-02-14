@@ -131,13 +131,14 @@ build {
       #"scripts/lightdm-greeter-vcf.sh",
       "scripts/user-setup.sh",
       "scripts/tnfs-install.sh",
-      "scripts/install-wine.sh",
+      #"scripts/install-wine.sh",
       "scripts/setup-fujinet-apps.sh",
       "scripts/build-install-fn-pc-apple.sh",
       "scripts/build-install-fn-pc-atari.sh",
       "scripts/install-altirra.sh",
       "scripts/install-applewin-linux.sh",
-      "scripts/firstboot-setup.sh"
+      "scripts/firstboot-setup.sh",
+      "scripts/cleanup.sh"
     ]
   }
 

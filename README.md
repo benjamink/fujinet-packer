@@ -16,6 +16,8 @@ One item that may be desirable to configure before booting the VM is setting the
 
 ## Running the VM
 
+**_NOTE:_** This VM is configured with 2 CPUs & 4GB RAM by default.  This should be considered a **MINIMUM**!  Increasing the RAM to 8GB or more will make using the VM **MUCH** more enjoyable.
+
 The default authentication for the built VM are as follows: 
 
 - Username: `fujinet`
