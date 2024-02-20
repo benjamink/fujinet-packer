@@ -3,7 +3,8 @@ set -x
 
 sudo apt-get install -y -qq git build-essential cmake libghc-zlib-dev libslirp-dev libminizip-dev libpcap-dev libyaml-dev libboost-all-dev libsdl2-image-dev libglib2.0-bin
 
-LAUNCHER_PATH="/home/$P_USERNAME/Desktop"
+LAUNCHER_PATH="/home/$P_USERNAME/Desktop/AppleWin.desktop"
+WEB_URL_PATH="/home/$P_USERNAME/Desktop/FujiNet-Apple-WebUI.desktop"
 FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 INSTALL_PATH="$FN_PATH/AppleWin"
 mkdir -p "$FN_PATH"
@@ -60,7 +61,7 @@ EOF
 
 chmod +x "$INSTALL_PATH/start-applewin.sh"
 
-cat <<EOF > "$LAUNCHER_PATH/AppleWin.desktop"
+cat <<EOF > "$LAUNCHER_PATH"
 [Desktop Entry]
 Encoding=UTF-8
 Name=FujiNet AppleWin
@@ -70,5 +71,18 @@ Exec=$INSTALL_PATH/start-applewin.sh
 Icon=/usr/local/share/applewin/resource/APPLEWIN.ICO
 EOF
 
-chmod +x "$LAUNCHER_PATH/AppleWin.desktop"
-gio set -t string "$LAUNCHER_PATH/AppleWin.desktop" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH/AppleWin.desktop" | awk '{print $1}')"
+chmod +x "$LAUNCHER_PATH"
+gio set -t string "$LAUNCHER_PATH" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH" | awk '{print $1}')"
+
+cat <<EOF > "$WEB_URL_PATH"
+[Desktop Entry]
+Version=1.0
+Name=FujiNet Apple Web UI
+Comment=Web UI admin console for FujiNet Apple
+Type=Link
+Icon=/home/$P_USERNAME/Pictures/fn-logo-black.png
+URL=http://localhost:8001
+EOF
+
+chmod +x "$WEB_URL_PATH"
+gio set -t string "$WEB_URL_PATH" metadata::xfce-exe-checksum "$(sha256sum "$WEB_URL_PATH" | awk '{print $1}')"

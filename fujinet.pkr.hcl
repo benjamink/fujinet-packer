@@ -86,11 +86,16 @@ source "virtualbox-iso" "fujinet" {
   ]
   vboxmanage = [
     ["modifyvm", "{{.Name}}", "--memory", "4096"],
-    ["modifyvm", "{{.Name}}", "--cpus", "2"],
-    ["setextradata", "{{.Name}}", "GUI/ScaleFactor", "2"]
+    ["modifyvm", "{{.Name}}", "--cpus", "2"]
   ]
   shutdown_command = "echo 'online' | sudo -S shutdown -P now"
 }
+
+//    ["modifyvm", "{{.Name}}", "--vram", "128"],
+//    ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
+//    ["modifyvm", "{{.Name}}", "--accelerate3d", "on"],
+//    ["modifyvm", "{{.Name}}", "--accelerate2dvideo", "on"]
+//    ["setextradata", "{{.Name}}", "GUI/ScaleFactor", "2"]
 
 build {
   name = "fujinet-packer"
@@ -109,6 +114,11 @@ build {
     destination = "/tmp/wallpaper.png"
   }
   */
+
+  provisioner "file" {
+    source      = "files/FujiNet-Logo-NoText-black.png"
+    destination = "/tmp/fn-logo-black.png"
+  }
 
   provisioner "file" {
     source      = "files/FujiNet-Logo-NoText.png"
@@ -131,7 +141,7 @@ build {
       #"scripts/lightdm-greeter-vcf.sh",
       "scripts/user-setup.sh",
       "scripts/tnfs-install.sh",
-      #"scripts/install-wine.sh",
+      "scripts/install-wine.sh",
       "scripts/setup-fujinet-apps.sh",
       "scripts/build-install-fn-pc-apple.sh",
       "scripts/build-install-fn-pc-atari.sh",

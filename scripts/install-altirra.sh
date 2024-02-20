@@ -4,6 +4,7 @@ set -x
 INSTALL_PATH="$P_FN_PATH/Altirra"
 NETSIO_DEV_PATH="Z:$(echo "$INSTALL_PATH/emulator/altirra-custom-device/netsio.atdevice" | sed 's#/#\\\\\\\\#g')"
 LAUNCHER_PATH="/home/$P_USERNAME/Desktop/Altirra.desktop"
+WEB_URL_PATH="/home/$P_USERNAME/Desktop/FujiNet-Atari-WebUI.desktop"
 
 sudo apt-get install -y -qq git libglib2.0-bin
 
@@ -70,3 +71,16 @@ EOF
 
 chmod +x "$LAUNCHER_PATH"
 gio set -t string "$LAUNCHER_PATH" metadata::xfce-exe-checksum "$(sha256sum "$LAUNCHER_PATH" | awk '{print $1}')"
+
+cat <<EOF > "$WEB_URL_PATH"
+[Desktop Entry]
+Version=1.0
+Name=FujiNet Atari Web UI
+Comment=Web UI admin console for FujiNet Atari
+Type=Link
+Icon=/home/$P_USERNAME/Pictures/fn-logo-black.png
+URL=http://localhost:8000
+EOF
+
+chmod +x "$WEB_URL_PATH"
+gio set -t string "$WEB_URL_PATH" metadata::xfce-exe-checksum "$(sha256sum "$WEB_URL_PATH" | awk '{print $1}')"

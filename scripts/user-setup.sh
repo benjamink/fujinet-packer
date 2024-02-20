@@ -10,6 +10,7 @@ mkdir "/home/$P_USERNAME/Documents"
 mkdir -p "${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 
 cp /tmp/wallpaper.png "/home/$P_USERNAME/Pictures/wallpaper.png"
+cp /tmp/fn-logo-black.png "/home/$P_USERNAME/Pictures/fn-logo-black.png"
 
 cat <<EOF | sudo tee /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -49,4 +50,13 @@ cat <<EOF | sudo tee /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
     <property name="workspace_count" type="int" value="1"/>
   </property>
 </channel>
+EOF
+
+cat <<EOF >> "/home/$P_USERNAME/.bashrc"
+
+# Disable screensaver
+export DISPLAY=:0.0
+xset s off
+xset s noblank
+xset -dpms
 EOF
