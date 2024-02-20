@@ -52,11 +52,11 @@ cat <<EOF | sudo tee /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
 </channel>
 EOF
 
-cat <<EOF >> "/home/$P_USERNAME/.bashrc"
-
-# Disable screensaver
-export DISPLAY=:0.0
-xset s off
-xset s noblank
-xset -dpms
-EOF
+#cat <<EOF >> "/home/$P_USERNAME/.bashrc"
+#
+## Disable screensaver
+#export DISPLAY=:0.0
+#xset s off
+#xset s noblank
+#xset -dpms
+#EOF

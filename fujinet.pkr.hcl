@@ -116,11 +116,6 @@ build {
   */
 
   provisioner "file" {
-    source      = "files/FujiNet-Logo-NoText-black.png"
-    destination = "/tmp/fn-logo-black.png"
-  }
-
-  provisioner "file" {
     source      = "files/FujiNet-Logo-NoText.png"
     destination = "/tmp/login-icon.png"
   }
@@ -147,8 +142,7 @@ build {
       "scripts/build-install-fn-pc-atari.sh",
       "scripts/install-altirra.sh",
       "scripts/install-applewin-linux.sh",
-      "scripts/firstboot-setup.sh",
-      "scripts/cleanup.sh"
+      "scripts/firstboot-setup.sh"
     ]
   }
 
@@ -157,4 +151,14 @@ build {
     destination = "/home/${local.username}/Pictures/altirra-logo.png"
   }
 
+  provisioner "file" {
+    source      = "files/FujiNet-Logo-NoText-black.png"
+    destination = "/home/${local.username}/Pictures/fn-logo-black.png"
+  }
+
+  provisioner "shell" {
+    scripts = [
+      "scripts/cleanup.sh"
+    ]
+  }
 }
