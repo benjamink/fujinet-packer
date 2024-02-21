@@ -1,4 +1,5 @@
 output-qemu/
 output/
+venv/
 **/*.log
 **/*.out

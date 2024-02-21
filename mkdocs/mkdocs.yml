@@ -1,0 +1,11 @@
+site_name: FujiNet VirtualMachine Help
+
+theme:
+  name: readthedocs
+
+nav:
+  - Home: index.md
+  - Emulators: emulators.md
+  - FujiNet Web UI: webui.md
+  - Tips & Tricks: tips.md
+  - Troubleshooting: troubleshooting.md
