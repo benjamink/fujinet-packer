@@ -22,6 +22,8 @@ locals {
   altirra_zip_url = "https://virtualdub.org/downloads/Altirra-4.20.zip"
 }
 
+// QEMU source is currently unused & untested.  The below may be developed & used at a future time.
+/*
 source "qemu" "fujinet" {
   iso_url          = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.4.0-amd64-netinst.iso"
   iso_checksum     = "sha256:64d727dd5785ae5fcfd3ae8ffbede5f40cca96f1580aaa2820e8b99dae989d94"
@@ -50,12 +52,13 @@ source "qemu" "fujinet" {
   ]
   shutdown_command = "echo 'online' | sudo -S shutdown -P now"
 }
+*/
 
 source "virtualbox-iso" "fujinet" {
   export_opts = [
     "--manifest",
     "--vsys", "0",
-    "--description", "FujiNet Development VM",
+    "--description", "FujiNet Development VM (version ${var.vm_version})",
     "--version", var.vm_version
   ]
   format                    = "ova"
@@ -76,7 +79,7 @@ source "virtualbox-iso" "fujinet" {
   iso_interface             = "sata"
   hard_drive_interface      = "sata"
   gfx_controller            = "vmsvga"
-  gfx_vram_size             = 33
+  gfx_vram_size             = 64
   guest_additions_mode      = "upload"
   guest_additions_interface = "sata"
   guest_additions_path      = "VBoxGuestAdditions.iso"
@@ -88,16 +91,11 @@ source "virtualbox-iso" "fujinet" {
     ["modifyvm", "{{.Name}}", "--memory", "4096"],
     ["modifyvm", "{{.Name}}", "--cpus", "2"],
     ["modifyvm", "{{.Name}}", "--draganddrop", "bidirectional"],
-    ["modifyvm", "{{.Name}}", "--clipboard", "bidirectional"]
+    ["modifyvm", "{{.Name}}", "--clipboard", "bidirectional"],
+    ["modifyvm", "{{.Name}}", "--audioout", "on"],
   ]
   shutdown_command = "echo 'online' | sudo -S shutdown -P now"
 }
-
-//    ["modifyvm", "{{.Name}}", "--vram", "128"],
-//    ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
-//    ["modifyvm", "{{.Name}}", "--accelerate3d", "on"],
-//    ["modifyvm", "{{.Name}}", "--accelerate2dvideo", "on"]
-//    ["setextradata", "{{.Name}}", "GUI/ScaleFactor", "2"]
 
 build {
   name = "fujinet-packer"

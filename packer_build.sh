@@ -37,5 +37,10 @@ fi
 
 if [[ "$LOCAL_ONLY" != "true" ]]
 then 
-  mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VirtualMachine/fujinet-debian12-vbox.ova"
+  if [[ "$VERSION" == "test" ]]
+  then
+    mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VM-Testing/test-fujinet-debian12-vbox.ova"
+  else
+    mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VirtualMachine/fujinet-debian12-vbox.ova"
+  fi
 fi
