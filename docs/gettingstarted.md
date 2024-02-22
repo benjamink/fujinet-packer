@@ -1,5 +1,9 @@
 # Getting Started
 
+## Downloading the VM
+
+[Download VirtualMachine OVA](https://mega.nz/folder/4L03hKRL#L1GOblpv8xbHROaKIPb1xg) (this is approximately 3.6GB in size).
+
 ## Importing the VM
 
 The results of building the Packer configuration is a VirtualBox OVA appliance VM that can be imported into VirtualBox under the `File` -> `Import Appliance...` menu.  The defaults should work fine when importing the OVA.
