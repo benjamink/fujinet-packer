@@ -9,6 +9,8 @@ mkdir "/home/$P_USERNAME/Downloads"
 mkdir "/home/$P_USERNAME/Documents"
 mkdir -p "${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 
+DISABLE_LIGHT_LOCKER_PATH="/home/$P_USERNAME/.config/autostart/light-locker.desktop"
+
 cp /tmp/wallpaper.png "/home/$P_USERNAME/Pictures/wallpaper.png"
 cp /tmp/fn-logo-black.png "/home/$P_USERNAME/Pictures/fn-logo-black.png"
 
@@ -52,11 +54,7 @@ cat <<EOF | sudo tee /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
 </channel>
 EOF
 
-#cat <<EOF >> "/home/$P_USERNAME/.bashrc"
-#
-## Disable screensaver
-#export DISPLAY=:0.0
-#xset s off
-#xset s noblank
-#xset -dpms
-#EOF
+cat <<EOF > "$DISABLE_LIGHT_LOCKER_PATH"
+[Desktop Entry]
+Hidden=true
+EOF
