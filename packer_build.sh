@@ -21,7 +21,7 @@ do
     v) VERSION="$OPTARG" ;;
     l) LOCAL_ONLY="true" ;;
     c) COPY_ONLY="true" ;;
-    h) usage ;;
+    *) usage ;;
   esac
 done
 

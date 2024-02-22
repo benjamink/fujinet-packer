@@ -14,9 +14,7 @@ The results of building the Packer configuration is a VirtualBox OVA appliance V
 
 ## Running the VM
 
-**_NOTE:_** This VM is configured with 2 CPUs & 4GB RAM by default.  This should be considered a **MINIMUM**!  Increasing the RAM to 8GB or more will make using the VM **MUCH** more enjoyable.
-
-The default authentication for the built VM are as follows: 
+The VM is configured to auto-login the `fujinet` user, however if there are any activities where the password is needed the following are the credentials given to the `fujinet` user:
 
 - Username: `fujinet`
 - Password: `online`

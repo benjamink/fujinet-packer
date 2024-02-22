@@ -17,3 +17,9 @@ The Apple FujiNet Web UI **_cannot_** be loaded **_without_** running the AppleW
 Once AppleWin has been started the web UI will work properly.  Again, note the highlighted host name indicating the web UI's association to the virtual FujiNet.
 
 ![Apple FujiNet Web UI](./media/fujinet-apple-webui-running.png)
+
+## Restarting the Virtual FujiNet Device
+
+Either of the virtual FujiNet devices can be restarted using the Web UI.  This is generally needed if the device needs to be reset for some reason or other.  In order to reset, click on the `Restart` button (highlighted below) which will then turn into a `Confirm` button.  Click the button a 2nd time to confirm the restart.  The web UI will reload when the device has been restarted successfully. 
+
+![Restart FujiNet Device](./media/fujinet-restart-button.png)
