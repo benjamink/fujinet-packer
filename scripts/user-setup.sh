@@ -54,6 +54,7 @@ cat <<EOF | sudo tee /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
 </channel>
 EOF
 
+mkdir -p .config/autostart
 cat <<EOF > "$DISABLE_LIGHT_LOCKER_PATH"
 [Desktop Entry]
 Hidden=true

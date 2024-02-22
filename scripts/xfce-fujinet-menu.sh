@@ -1,5 +1,5 @@
-#!/usr/bin/env bash 
-set -x 
+#!/usr/bin/env bash
+set -x
 
 MENU_ROOT_PATH="/home/$P_USERNAME/.config/menus"
 APPS_ROOT_PATH="/home/$P_USERNAME/.local/share/applications"
@@ -13,41 +13,41 @@ FN_WIKI_ICON_PATH="/home/$P_USERNAME/Desktop/FujiNet-Wiki-URL.desktop"
 VM_HELP_ICON_PATH="/home/$P_USERNAME/Desktop/FujiNet-VM-Help-URL.desktop"
 APPLEWIN_HELP_ICON_PATH="/home/$P_USERNAME/Desktop/AppleWin-Help-URL.desktop"
 
-cat <<EOF > "$VM_HELP_ICON_PATH"
+cat <<EOF | tee "$VM_HELP_ICON_PATH"
 [Desktop Entry]
 Version=1.0
 Type=Link
 Name=FujiNet VM Help
-Comment=Help for using this VM 
-Icon=system-help 
-URL=https://fujinet-vm.readthedocs.io 
-EOF 
+Comment=Help for using this VM
+Icon=system-help
+URL=https://fujinet-vm.readthedocs.io
+EOF
 
 chmod +x "$VM_HELP_ICON_PATH"
 gio set -t string "$VM_HELP_ICON_PATH" metadata::xfce-exe-checksum "$(sha256sum "$VM_HELP_ICON_PATH" | awk '{print $1}')"
 
-cat <<EOF > "$APPLEWIN_HELP_ICON_PATH"
+cat <<EOF | tee "$APPLEWIN_HELP_ICON_PATH"
 [Desktop Entry]
 Version=1.0
 Type=Link
 Name=AppleWin Help
 Comment=Help for AppleWin
-Icon=system-help 
+Icon=system-help
 URL=file:///home/$P_USERNAME/FujiNet/AppleWin/help/toc.html
-EOF 
+EOF
 
 chmod +x "$APPLEWIN_HELP_ICON_PATH"
 gio set -t string "$APPLEWIN_HELP_ICON_PATH" metadata::xfce-exe-checksum "$(sha256sum "$APPLEWIN_HELP_ICON_PATH" | awk '{print $1}')"
 
-cat <<EOF > "$FN_WIKI_ICON_PATH"
+cat <<EOF | tee "$FN_WIKI_ICON_PATH"
 [Desktop Entry]
 Version=1.0
 Type=Link
 Name=FujiNet Wiki
 Comment=Main FujiNet documentation wiki
-Icon=system-help 
+Icon=system-help
 URL=https://github.com/FujiNetWIFI/fujinet-firmware/wiki
-EOF 
+EOF
 
 chmod +x "$FN_WIKI_ICON_PATH"
 gio set -t string "$FN_WIKI_ICON_PATH" metadata::xfce-exe-checksum "$(sha256sum "$FN_WIKI_ICON_PATH" | awk '{print $1}')"

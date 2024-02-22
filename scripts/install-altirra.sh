@@ -10,7 +10,7 @@ sudo apt-get install -y -qq git libglib2.0-bin
 
 # Clone fujinet-emulator-bridge
 mkdir -p "$INSTALL_PATH"
-cd "$INSTALL_PATH"
+cd "$INSTALL_PATH" || exit
 git clone https://github.com/FujiNetWIFI/fujinet-emulator-bridge emulator
 
 cat <<EOF | sudo tee /etc/systemd/system/fn-emulator-bridge.service

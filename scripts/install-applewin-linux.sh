@@ -8,15 +8,15 @@ WEB_URL_PATH="/home/$P_USERNAME/Desktop/FujiNet-Apple-WebUI.desktop"
 FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 INSTALL_PATH="$FN_PATH/AppleWin"
 mkdir -p "$FN_PATH"
-cd "$FN_PATH"
+cd "$FN_PATH" || exit
 
 git clone https://github.com/FujiNetWIFI/AppleWin.git
-cd AppleWin
+cd AppleWin || exit
 git fetch --all
 git checkout linux
 git submodule update --init --recursive
 mkdir build
-cd build
+cd build || exit
 cmake -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_SA2=on .. 
 make
 sudo make install 
