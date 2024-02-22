@@ -8,6 +8,10 @@
 
 The results of building the Packer configuration is a VirtualBox OVA appliance VM that can be imported into VirtualBox under the `File` -> `Import Appliance...` menu.  The defaults should work fine when importing the OVA.
 
+![Import OVA into VirtualBox](./media/vbox-ova-import-1.png)
+
+![Import OVA Details](./media/vbox-ova-import-2.png)
+
 ## Running the VM
 
 **_NOTE:_** This VM is configured with 2 CPUs & 4GB RAM by default.  This should be considered a **MINIMUM**!  Increasing the RAM to 8GB or more will make using the VM **MUCH** more enjoyable.
