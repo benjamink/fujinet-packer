@@ -7,5 +7,5 @@ nav:
   - Home: index.md
   - Emulators: emulators.md
   - FujiNet Web UI: webui.md
-  - Tips & Tricks: tips.md
+  - Tips/Tricks: tips.md
   - Troubleshooting: troubleshooting.md
