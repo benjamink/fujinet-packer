@@ -4,4 +4,4 @@ The FujiNet VirtualMachine (VM) is an appliance that makes it easy to try out th
 
 This online help provides instructions on using the VM & getting started with FujiNet with the provided emulators.
 
-![Running FujiNet VM](medial/fujinet-demo-screenshot.png)
+![Running FujiNet VM](./media/fujinet-demo-screenshot.png)
