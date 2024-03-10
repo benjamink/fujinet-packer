@@ -28,6 +28,7 @@ done
 if [[ "$VERSION" != "test" ]]
 then 
   git tag "$VERSION" 
+  git push --tags
 fi 
 
 if [[ "$COPY_ONLY" != "true" ]]
@@ -41,6 +42,6 @@ then
   then
     mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VM-Testing/test-fujinet-debian12-vbox.ova"
   else
-    mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VirtualMachine/fujinet-debian12-vbox.ova"
+    mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VirtualMachine/fujinet-debian12-vbox-${VERSION}.ova"
   fi
 fi
