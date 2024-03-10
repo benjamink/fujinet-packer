@@ -14,7 +14,6 @@ FNPIO_PATH="$FN_PATH/fujinet-firmware"
 mkdir -p "$FNPIO_PATH/build"
 cd "$FNPIO_PATH" || exit
 
-#./build.sh -y -s fujinet-atari-rev1
 ./build.sh -cp ATARI
 
 rsync -au "$FNPIO_PATH/build/dist/" "$INSTALL_PATH/"

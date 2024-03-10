@@ -14,7 +14,6 @@ FNPIO_PATH="$FN_PATH/fujinet-firmware"
 mkdir -p "$FNPIO_PATH/build"
 cd "$FNPIO_PATH" || exit
 
-#./build.sh -y -s fujiapple-rev0
 ./build.sh -cp APPLE
 
 rsync -au "$FNPIO_PATH/build/dist/" "$INSTALL_PATH/"
