@@ -1,8 +1,16 @@
 # Changelog
 
+## 0.4.0
+
+- 2024-03-10
+  - Features:
+    - Fresh build with latest SP-to-SLIP interface changes in the [fujinet-firmware](https://github.com/FujiNetWIFI/fujinet-firmware) project
+  - Maintenance:
+    - Rename `fujinet-platformio` GitHub repositories to `fujinet-firmware` to follow upstream project changes
+
 ## 0.3.0
 
-- 2022-02-22
+- 2024-02-12
   - Features: 
     - Enable auto-login for `fujinet` user
     - Create `FujiNet` menu item with launchers for emulators & links to documentation
