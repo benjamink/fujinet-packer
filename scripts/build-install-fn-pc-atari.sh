@@ -8,9 +8,9 @@ INSTALL_PATH="$FN_PATH/FujiNet-PC-Atari"
 mkdir -p "$INSTALL_PATH"
 cd "$FN_PATH" || exit
 
-git clone https://github.com/FujiNetWIFI/fujinet-platformio
+git clone https://github.com/FujiNetWIFI/fujinet-firmware
 
-FNPIO_PATH="$FN_PATH/fujinet-platformio"
+FNPIO_PATH="$FN_PATH/fujinet-firmware"
 mkdir -p "$FNPIO_PATH/build"
 cd "$FNPIO_PATH" || exit
 
