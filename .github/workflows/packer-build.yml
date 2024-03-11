@@ -18,10 +18,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: MEGA Login
-        run: mega-login ${{ secrets.mega_email }} ${{ secrets.mega_password }}
-
       # Runs a set of commands using the runners shell
       - name: MEGA ls
         run: mega-ls
+
+      - name: DEBUG
+        run: |
+          printenv
