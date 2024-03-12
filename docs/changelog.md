@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1
+
+- 2024-03-12
+  - Features:
+    - Fresh build with SMB/FTP support built into CONFIG
+
 ## 0.4.0
 
 - 2024-03-10
