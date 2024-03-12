@@ -6,6 +6,7 @@ sudo apt-get install -y -qq samba samba-common-bin
 
 # Configure tnfs user & add Packer user to tnfs group
 sudo useradd -c 'tnfsd user' -U -m -d /tnfs -r tnfs 
+sudo chmod 777 /tnfs
 sudo usermod -a -G tnfs "$P_USERNAME"
 
 # Install tnfsd
@@ -17,6 +18,7 @@ cat <<EOF | sudo tee -a /etc/samba/smb.conf
 [tnfs]
   path = /tnfs
   writeable = Yes
+  browseable = Yes
   create mask = 0777
   directory mask = 0777
   public = yes
