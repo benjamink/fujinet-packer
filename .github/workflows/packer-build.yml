@@ -4,7 +4,16 @@ name: Packer Build
 
 # Controls when the workflow will run
 on:
+  push:
+    tags:
+      -'*.*.*'
   workflow_dispatch:
+    inputs:
+      version:
+        description: Build version
+        type: string
+        default: test
+        required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -19,9 +28,5 @@ jobs:
       - uses: actions/checkout@v4
 
       # Runs a set of commands using the runners shell
-      - name: MEGA ls
-        run: mega-ls
-
-      - name: DEBUG
-        run: |
-          ls -l
+      - name: Test Build
+        run: echo ${{ github.ref_name }}
