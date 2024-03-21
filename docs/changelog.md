@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.2
+
+- 2024-03-20
+  - Features:
+    - Fresh build with `fujinet-lib` merged into main branch
+
 ## 0.4.1
 
 - 2024-03-12
