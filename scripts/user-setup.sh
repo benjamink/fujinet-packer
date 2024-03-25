@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 set -x
 
-sudo apt-get install -y epiphany-browser 
+sudo apt-get install -y epiphany-browser figlet
 
 mkdir "/home/$P_USERNAME/Desktop"
 mkdir "/home/$P_USERNAME/Pictures"
 mkdir "/home/$P_USERNAME/Downloads"
 mkdir "/home/$P_USERNAME/Documents"
+mkdir "/home/$P_USERNAME/.local/bin"
 mkdir -p "${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 
 DISABLE_LIGHT_LOCKER_PATH="/home/$P_USERNAME/.config/autostart/light-locker.desktop"

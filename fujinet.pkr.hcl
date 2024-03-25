@@ -148,6 +148,11 @@ build {
   }
 
   provisioner "file" {
+    source      = "files/run-nc"
+    destination = "/home/${local.username}/.local/bin/run-nc"
+  }
+
+  provisioner "file" {
     source      = "files/altirra-logo.png"
     destination = "/home/${local.username}/Pictures/altirra-logo.png"
   }

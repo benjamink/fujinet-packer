@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.3
+
+- 2024-03-25
+  - Features:
+    - Updates to `fujinet-lib` merged into main branch
+    - `run-nc` script added to make demo'ing `netcat` to the VM guest `localhost` easier
+
 ## 0.4.2
 
 - 2024-03-20
