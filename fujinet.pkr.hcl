@@ -48,7 +48,7 @@ source "qemu" "fujinet" {
   accelerator      = "kvm"
   memory           = 8192
   net_device       = "virtio-net"
-  output_directory = "output"
+  output_directory = "output-qemu"
   vm_name          = "fujinet-debian12-qemu.qcow2"
   http_directory   = "http"
   boot_command = [
