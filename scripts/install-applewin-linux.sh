@@ -15,10 +15,8 @@ cd AppleWin || exit
 git fetch --all
 git checkout linux
 git submodule update --init --recursive
-mkdir build
+./build -cbg
 cd build || exit
-cmake -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_SA2=on .. 
-make
 sudo make install 
 
 mkdir -p "/home/$P_USERNAME/.applewin"
