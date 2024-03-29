@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.0
+
+- 2024-03-29
+  - Features:
+    - Using a new build of AppleWin that includes a merge of the latest upstream changes
+      - Notable is that the Linux version has updated the hotkeys a little to be more "standard", so `F8` is settings, and `Alt-F4` is exit (as opposed to `F2`/`F3` as they used to be)
+    - Latest updates to `fujinet-firmware` & `fujinet-apps` repositories
+    - QEMU/Libvirt `qcow2` image format is now built as well (beta)
+
+
 ## 0.4.3
 
 - 2024-03-25
