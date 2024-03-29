@@ -22,7 +22,7 @@ variable "sources" {
   description = "Specify which source type(s) to build"
   default = [
     "source.qemu.fujinet",
-    #"source.virtualbox-iso.fujinet"
+    "source.virtualbox-iso.fujinet"
   ]
 }
 
@@ -41,6 +41,7 @@ source "qemu" "fujinet" {
   ssh_pty          = true
   boot_wait        = "10s"
   disk_size        = "25000"
+  disk_compression = true
   format           = "qcow2"
   headless         = true
   cpus             = 4
@@ -48,11 +49,11 @@ source "qemu" "fujinet" {
   memory           = 8192
   net_device       = "virtio-net"
   output_directory = "output"
-  vm_name          = "fujinet-debian12-qemu"
+  vm_name          = "fujinet-debian12-qemu.qcow2"
   http_directory   = "http"
   boot_command = [
     "<wait><esc><wait>",
-    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
+    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/qemu-preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
   ]
   qemuargs = [
     ["-m", "4096M"],
@@ -92,7 +93,7 @@ source "virtualbox-iso" "fujinet" {
   guest_additions_path      = "VBoxGuestAdditions.iso"
   boot_command = [
     "<wait><esc><wait>",
-    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
+    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/vbox-preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
   ]
   vboxmanage = [
     ["modifyvm", "{{.Name}}", "--memory", "4096"],
@@ -105,7 +106,7 @@ source "virtualbox-iso" "fujinet" {
 }
 
 build {
-  name    = "fujinet-packer"
+  name    = "build"
   sources = var.sources
 
   provisioner "file" {
@@ -129,13 +130,26 @@ build {
     environment_vars = [
       "DEBIAN_FRONTEND=noninteractive",
       "P_USERNAME=${local.username}",
-      "P_ALTIRRA_ZIP_URL=${local.altirra_zip_url}",
       "P_FN_PATH=/home/${local.username}/FujiNet",
       "CMAKE_COLOR_DIAGNOSTICS=OFF",
       "PLATFORMIO_NO_ANSI=True"
     ]
     scripts = [
       "scripts/virtualbox.sh",
+    ]
+    only = ["virtualbox-iso.fujinet"]
+  }
+
+  provisioner "shell" {
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive",
+      "P_USERNAME=${local.username}",
+      "P_ALTIRRA_ZIP_URL=${local.altirra_zip_url}",
+      "P_FN_PATH=/home/${local.username}/FujiNet",
+      "CMAKE_COLOR_DIAGNOSTICS=OFF",
+      "PLATFORMIO_NO_ANSI=True"
+    ]
+    scripts = [
       "scripts/fujinet-sudoers.sh",
       "scripts/lightdm-greeter-fn.sh",
       #"scripts/lightdm-greeter-vcf.sh",

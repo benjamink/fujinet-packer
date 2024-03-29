@@ -15,7 +15,7 @@ cd AppleWin || exit
 git fetch --all
 git checkout linux
 git submodule update --init --recursive
-./build -cbg
+./build.sh -cbg
 cd build || exit
 sudo make install 
 

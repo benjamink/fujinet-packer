@@ -33,7 +33,7 @@ fi
 
 if [[ "$COPY_ONLY" != "true" ]]
 then
-  PACKER_LOG=1 PACKER_DEBUG=1 packer build -parallel-builds=2 -var="vm_version=$VERSION" -force -color=false -machine-readable -on-error=cleanup . | tee packer.out
+  PACKER_LOG=1 PACKER_DEBUG=2 packer build -var="vm_version=$VERSION" -force -color=false -machine-readable . | tee packer.out
 fi
 
 if [[ "$LOCAL_ONLY" != "true" ]]
