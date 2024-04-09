@@ -13,6 +13,7 @@ git clone https://github.com/FujiNetWIFI/fujinet-firmware
 FNPIO_PATH="$FN_PATH/fujinet-firmware"
 mkdir -p "$FNPIO_PATH/build"
 cd "$FNPIO_PATH" || exit
+git pull --rebase
 
 ./build.sh -cp ATARI
 

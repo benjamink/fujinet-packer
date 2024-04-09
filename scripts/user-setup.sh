@@ -7,13 +7,20 @@ mkdir "/home/$P_USERNAME/Desktop"
 mkdir "/home/$P_USERNAME/Pictures"
 mkdir "/home/$P_USERNAME/Downloads"
 mkdir "/home/$P_USERNAME/Documents"
-mkdir "/home/$P_USERNAME/.local/bin"
+mkdir -p "/home/$P_USERNAME/.local/bin"
 mkdir -p "${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
+
+if [[ "$PACKER_BUILD_TYPE" == "qemu"  ]]
+then
+  MONITOR="monitorVirtual-1"
+else 
+  MONITOR="monitorVirtual1"
+fi
 
 DISABLE_LIGHT_LOCKER_PATH="/home/$P_USERNAME/.config/autostart/light-locker.desktop"
 
 cp /tmp/wallpaper.png "/home/$P_USERNAME/Pictures/wallpaper.png"
-cp /tmp/fn-logo-black.png "/home/$P_USERNAME/Pictures/fn-logo-black.png"
+#cp /tmp/fn-logo-black.png "/home/$P_USERNAME/Pictures/fn-logo-black.png"
 
 cat <<EOF | sudo tee /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -21,7 +28,7 @@ cat <<EOF | sudo tee /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 <channel name="xfce4-desktop" version="1.0">
   <property name="backdrop" type="empty">
     <property name="screen0" type="empty">
-      <property name="monitorVirtual1" type="empty">
+      <property name="$MONITOR" type="empty">
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="4"/>
