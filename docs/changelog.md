@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1
+
+- 2024-04-11
+  - Features
+    - Updates to `fujinet-firmware` (FujiNet PC for Atari & Apple) [Commits since 2024-03-29](https://github.com/FujiNetWIFI/fujinet-firmware/commits/master/?since=2024-03-29&until=2024-04-11)
+      - Updates to SSL certificates
+      - Support for TCP in TNFS client
+
 ## 0.5.0
 
 - 2024-03-29
