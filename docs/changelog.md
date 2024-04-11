@@ -1,5 +1,7 @@
 # Changelog
 
+Visit the [Getting Started](gettingstarted.md) page for details on downloading & installing the latest version of the VM.
+
 ## 0.5.1
 
 - 2024-04-11
