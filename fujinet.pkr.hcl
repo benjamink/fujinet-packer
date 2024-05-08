@@ -155,6 +155,7 @@ build {
       #"scripts/lightdm-greeter-vcf.sh",
       "scripts/user-setup.sh",
       "scripts/tnfs-install.sh",
+      "scripts/install-dir2atr.sh",
       "scripts/install-wine.sh",
       "scripts/setup-fujinet-apps.sh",
       "scripts/build-install-fn-pc-apple.sh",
