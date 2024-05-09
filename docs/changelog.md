@@ -2,6 +2,13 @@
 
 Visit the [Getting Started](gettingstarted.md) page for details on downloading & installing the latest version of the VM.
 
+## 0.5.2
+
+- 2024-05-08
+  - Features
+    - General `fujinet-firmware` updates
+    - `dir2atr`, `adir` & `ataricom` utilities are now installed from source (see [HiassofT's Atari 8bit World](https://www.horus.com/~hias/atari/) for details)
+
 ## 0.5.1
 
 - 2024-04-11
