@@ -1,5 +1,5 @@
-output-qemu/
-output/
+**/*.ova
+**/*.qcow2
 venv/
 **/*.log
 **/*.out
