@@ -8,7 +8,7 @@ OUTPUT_FLAG=""
 function usage() {
   echo "$0 [-o build_output] [-v version] [-l] [-c] [-n] [-h]"
   echo
-  echo "  -o <build_output> Set the type of VM to build (default 'virtualbox-iso', alternative 'qemu')"
+  echo "  -o <build_output> Set the type of VM to build (default 'virtualbox-iso', alternative 'qemu', 'vmware-iso')"
   echo "  -v <version>      Provide a version for the VM build (default: 'test')"
   echo "  -l                If set build WILL NOT be uploaded to MEGA (local only)" 
   echo "  -c                Just copy the OVA to MEGA"
@@ -57,9 +57,13 @@ then
       qemu)
         mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VM-Testing/test-fujinet-debian12-qemu.qcow2"
         ;;
+      vmware-iso)
+        mega-put "output-vmware/fujinet-debian12-vmware.ova" "FujiNet/VM-Testing/test-fujinet-debian12-vmware.ova"
+        ;;
       *)
         mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VM-Testing/test-fujinet-debian12-vbox.ova"
         mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VM-Testing/test-fujinet-debian12-qemu.qcow2"
+        mega-put "output-vmware/fujinet-debian12-vmware.ova" "FujiNet/VM-Testing/test-fujinet-debian12-vmware.ova"
         ;;
     esac  
   else
@@ -70,9 +74,13 @@ then
       qemu)
         mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VirtualMachine/fujinet-debian12-qemu-${VERSION}.qcow2"
         ;;
+      vmware-iso)
+        mega-put "output-vmware/fujinet-debian12-vmware.ova" "FujiNet/VirtualMachine/fujinet-debian12-vmware-${VERSION}.ova"
+        ;;
       *)
         mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VirtualMachine/fujinet-debian12-vbox-${VERSION}.ova"
         mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VirtualMachine/fujinet-debian12-qemu-${VERSION}.qcow2"
+        mega-put "output-vmware/fujinet-debian12-vmware.ova" "FujiNet/VirtualMachine/fujinet-debian12-vmware-${VERSION}.ova"
         ;;
     esac
   fi

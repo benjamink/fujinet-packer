@@ -84,6 +84,7 @@ source "vmware-iso" "fujinet" {
   cpus                = 4
   memory              = 8192
   output_directory    = "output-vmware"
+  vm_name             = "fujinet-debian12-vmware.ova"
   http_directory      = "http"
   boot_command = [
     "<wait><esc><wait>",
