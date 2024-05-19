@@ -62,7 +62,7 @@ then
         ;;
       *)
         mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VM-Testing/test-fujinet-debian12-vbox.ova"
-        mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VM-Testing/test-fujinet-debian12-qemu.qcow2"
+        #mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VM-Testing/test-fujinet-debian12-qemu.qcow2"
         mega-put "output-vmware/fujinet-debian12-vmware.ova" "FujiNet/VM-Testing/test-fujinet-debian12-vmware.ova"
         ;;
     esac  
@@ -79,7 +79,7 @@ then
         ;;
       *)
         mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VirtualMachine/fujinet-debian12-vbox-${VERSION}.ova"
-        mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VirtualMachine/fujinet-debian12-qemu-${VERSION}.qcow2"
+        #mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VirtualMachine/fujinet-debian12-qemu-${VERSION}.qcow2"
         mega-put "output-vmware/fujinet-debian12-vmware.ova" "FujiNet/VirtualMachine/fujinet-debian12-vmware-${VERSION}.ova"
         ;;
     esac

@@ -25,7 +25,7 @@ variable "sources" {
   type        = list(string)
   description = "Specify which source type(s) to build"
   default = [
-    "source.qemu.fujinet",
+    //"source.qemu.fujinet",
     "source.virtualbox-iso.fujinet",
     "source.vmware-iso.fujinet"
   ]
@@ -84,11 +84,13 @@ source "vmware-iso" "fujinet" {
   cpus                = 4
   memory              = 8192
   output_directory    = "output-vmware"
-  vm_name             = "fujinet-debian12-vmware.ova"
+  vm_name             = "fujinet-debian12-vmware"
+  vnc_disable_password = true
   http_directory      = "http"
   boot_command = [
     "<wait><esc><wait>",
-    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/vmware-preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
+    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/vmware-preseed.cfg",
+    "<enter><wait><enter>"
   ]
   shutdown_command = "echo 'online' | sudo -S shutdown -P now"
 }
