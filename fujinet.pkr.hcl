@@ -25,11 +25,12 @@ variable "sources" {
   type        = list(string)
   description = "Specify which source type(s) to build"
   default = [
-    //"source.qemu.fujinet",
     "source.virtualbox-iso.fujinet",
     "source.vmware-iso.fujinet"
   ]
 }
+
+//"source.qemu.fujinet",
 
 locals {
   username        = "fujinet"
@@ -39,35 +40,35 @@ locals {
 }
 
 // QEMU source is currently unused & untested.  The below may be developed & used at a future time.
-source "qemu" "fujinet" {
-  iso_url          = local.iso_url
-  iso_checksum     = local.iso_checksum
-  ssh_username     = local.username
-  ssh_password     = "online"
-  ssh_wait_timeout = "3600s"
-  ssh_pty          = true
-  boot_wait        = "10s"
-  disk_size        = "25000"
-  disk_compression = true
-  format           = "qcow2"
-  headless         = true
-  cpus             = 4
-  accelerator      = "kvm"
-  memory           = 8192
-  net_device       = "virtio-net"
-  output_directory = "output-qemu"
-  vm_name          = "fujinet-debian12-qemu.qcow2"
-  http_directory   = "http"
-  boot_command = [
-    "<wait><esc><wait>",
-    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/qemu-preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
-  ]
-  qemuargs = [
-    ["-m", "4096M"],
-    ["-smp", "2"]
-  ]
-  shutdown_command = "echo 'online' | sudo -S shutdown -P now"
-}
+//source "qemu" "fujinet" {
+//  iso_url          = local.iso_url
+//  iso_checksum     = local.iso_checksum
+//  ssh_username     = local.username
+//  ssh_password     = "online"
+//  ssh_wait_timeout = "3600s"
+//  ssh_pty          = true
+//  boot_wait        = "10s"
+//  disk_size        = "25000"
+//  disk_compression = true
+//  format           = "qcow2"
+//  headless         = true
+//  cpus             = 4
+//  accelerator      = "kvm"
+//  memory           = 8192
+//  net_device       = "virtio-net"
+//  output_directory = "output-qemu"
+//  vm_name          = "fujinet-debian12-qemu.qcow2"
+//  http_directory   = "http"
+//  boot_command = [
+//    "<wait><esc><wait>",
+//    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/qemu-preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
+//  ]
+//  qemuargs = [
+//    ["-m", "4096M"],
+//    ["-smp", "2"]
+//  ]
+//  shutdown_command = "echo 'online' | sudo -S shutdown -P now"
+//}
 
 // VMware source is currently unused & untested.  The below may be developed & used at a future time.
 source "vmware-iso" "fujinet" {
