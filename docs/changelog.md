@@ -2,6 +2,13 @@
 
 Visit the [Getting Started](gettingstarted.md) page for details on downloading & installing the latest version of the VM.
 
+## 0.5.3
+
+- 2024-08-05
+  - Features
+    - General `fujinet-firmware` updates
+    - Add VMWare OVA build
+
 ## 0.5.2
 
 - 2024-05-08

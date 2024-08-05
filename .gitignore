@@ -1,3 +1,4 @@
+output-vmware/*
 **/*.ova
 **/*.qcow2
 venv/

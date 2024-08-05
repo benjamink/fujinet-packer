@@ -4,6 +4,10 @@ packer {
       version = "~> 1"
       source  = "github.com/hashicorp/qemu"
     }
+    vmware = {
+      version = "~> 1"
+      source  = "github.com/hashicorp/vmware"
+    }
     virtualbox = {
       version = "~> 1"
       source  = "github.com/hashicorp/virtualbox"
@@ -21,43 +25,73 @@ variable "sources" {
   type        = list(string)
   description = "Specify which source type(s) to build"
   default = [
-    "source.qemu.fujinet",
-    "source.virtualbox-iso.fujinet"
+    "source.virtualbox-iso.fujinet",
+    "source.vmware-iso.fujinet"
   ]
 }
+
+//"source.qemu.fujinet",
 
 locals {
   username        = "fujinet"
   altirra_zip_url = "https://virtualdub.org/downloads/Altirra-4.20.zip"
+  iso_url         = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.5.0-amd64-netinst.iso"
+  iso_checksum    = "sha256:013f5b44670d81280b5b1bc02455842b250df2f0c6763398feb69af1a805a14f"
 }
 
 // QEMU source is currently unused & untested.  The below may be developed & used at a future time.
-source "qemu" "fujinet" {
-  iso_url          = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.4.0-amd64-netinst.iso"
-  iso_checksum     = "sha256:64d727dd5785ae5fcfd3ae8ffbede5f40cca96f1580aaa2820e8b99dae989d94"
-  ssh_username     = local.username
-  ssh_password     = "online"
-  ssh_wait_timeout = "3600s"
-  ssh_pty          = true
-  boot_wait        = "10s"
-  disk_size        = "25000"
-  disk_compression = true
-  format           = "qcow2"
-  headless         = true
-  cpus             = 4
-  accelerator      = "kvm"
-  memory           = 8192
-  net_device       = "virtio-net"
-  output_directory = "output-qemu"
-  vm_name          = "fujinet-debian12-qemu.qcow2"
-  http_directory   = "http"
+//source "qemu" "fujinet" {
+//  iso_url          = local.iso_url
+//  iso_checksum     = local.iso_checksum
+//  ssh_username     = local.username
+//  ssh_password     = "online"
+//  ssh_wait_timeout = "3600s"
+//  ssh_pty          = true
+//  boot_wait        = "10s"
+//  disk_size        = "25000"
+//  disk_compression = true
+//  format           = "qcow2"
+//  headless         = true
+//  cpus             = 4
+//  accelerator      = "kvm"
+//  memory           = 8192
+//  net_device       = "virtio-net"
+//  output_directory = "output-qemu"
+//  vm_name          = "fujinet-debian12-qemu.qcow2"
+//  http_directory   = "http"
+//  boot_command = [
+//    "<wait><esc><wait>",
+//    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/qemu-preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
+//  ]
+//  qemuargs = [
+//    ["-m", "4096M"],
+//    ["-smp", "2"]
+//  ]
+//  shutdown_command = "echo 'online' | sudo -S shutdown -P now"
+//}
+
+// VMware source is currently unused & untested.  The below may be developed & used at a future time.
+source "vmware-iso" "fujinet" {
+  iso_url             = local.iso_url
+  iso_checksum        = local.iso_checksum
+  ssh_username        = local.username
+  ssh_password        = "online"
+  ssh_wait_timeout    = "3600s"
+  ssh_pty             = true
+  boot_wait           = "10s"
+  disk_size           = "25000"
+  headless            = true
+  format              = "ova"
+  cpus                = 4
+  memory              = 8192
+  output_directory    = "output-vmware"
+  vm_name             = "fujinet-debian12-vmware"
+  vnc_disable_password = true
+  http_directory      = "http"
   boot_command = [
     "<wait><esc><wait>",
-    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/qemu-preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
-  ]
-  qemuargs = [
-    ["-m", "4096M"],
-    ["-smp", "2"]
+    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/vmware-preseed.cfg",
+    "<enter><wait><enter>"
   ]
   shutdown_command = "echo 'online' | sudo -S shutdown -P now"
 }
@@ -70,8 +104,8 @@ source "virtualbox-iso" "fujinet" {
     "--version", var.vm_version
   ]
   format                    = "ova"
-  iso_url                   = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.4.0-amd64-netinst.iso"
-  iso_checksum              = "sha256:64d727dd5785ae5fcfd3ae8ffbede5f40cca96f1580aaa2820e8b99dae989d94"
+  iso_url                   = local.iso_url
+  iso_checksum              = local.iso_checksum
   ssh_username              = local.username
   ssh_password              = "online"
   ssh_wait_timeout          = "3600s"
@@ -125,6 +159,15 @@ build {
     source      = "files/FujiNet-Logo-NoText.png"
     destination = "/tmp/login-icon.png"
   }
+
+  /*
+  provisioner "shell" {
+    scripts = [
+      "scripts/vmware-tools.sh",
+    ]
+    only = ["vmware-iso.fujinet"]
+  }
+  */
 
   provisioner "shell" {
     environment_vars = [
