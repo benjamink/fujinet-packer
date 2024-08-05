@@ -7,6 +7,7 @@ Visit the [Getting Started](gettingstarted.md) page for details on downloading &
 - 2024-08-05
   - Features
     - General `fujinet-firmware` updates
+    - Add VMWare OVA build
 
 ## 0.5.2
 
