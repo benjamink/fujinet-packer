@@ -35,6 +35,7 @@ function do_packages() {
   message "Upgrading packages ..."
   sudo apt update 
   sudo apt upgrade -y 
+  sudo apt autoremove -y
 }
 
 function do_firmware_repo() {
