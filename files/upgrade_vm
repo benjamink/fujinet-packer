@@ -14,6 +14,7 @@ NOCOLOR="\033[0m"
 function usage() {
   echo -e "${YELLOW}$(basename $0) ${DARK_GRAY}[-h]${NOCOLOR}"
   echo -e "${BLUE}"
+  echo "  -a - Upgrade everything"
   echo "  -p - Upgrade packages"
   echo "  -l - Upgrade fn-pc-apple"
   echo "  -t - Upgrade fn-pc-atari"
