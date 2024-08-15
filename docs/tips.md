@@ -23,3 +23,5 @@ curl -sLo - https://tinyurl.com/bdevmdmu | bash -s -- -h
 ![upgrade_vm Help Output](./media/upgrade_vm-help.png)
 
 Replace the `-h` in the above command with the appropriate flag to pass to the script as per the help output.
+
+>**_NOTE:_** Upgrading components can take a **VERY LONG TIME** since source code is being recompiled inside the VM.  It may be desirable to only upgrade specific components rather than using the `-a` option which upgrades **ALL** components.
