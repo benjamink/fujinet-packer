@@ -12,13 +12,14 @@ DARK_GRAY="\033[1;30m"
 NOCOLOR="\033[0m"
 
 function usage() {
-  echo -e "${YELLOW}$(basename $0) ${DARK_GRAY}[-h]${NOCOLOR}"
+  echo -e "${YELLOW}upgrade_vm ${DARK_GRAY}[-a|-p|-l|-t|-w|-h]${NOCOLOR}"
   echo -e "${BLUE}"
   echo "  -a - Upgrade everything"
   echo "  -p - Upgrade packages"
   echo "  -l - Upgrade fn-pc-apple"
   echo "  -t - Upgrade fn-pc-atari"
   echo "  -w - Upgrade AppleWin"
+  echo "  -h - Print this help"
   echo -e "${NOCOLOR}"
   exit 1
 }
