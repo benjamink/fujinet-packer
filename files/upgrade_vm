@@ -92,15 +92,15 @@ do
     w)
       do_applewin
       ;;
-    h)
-      usage 
-      ;;
-    *) 
+    a)
       do_packages 
       do_firmware_repo 
       do_pc_apple
       do_pc_atari
       do_applewin
+      ;;
+    *) 
+      usage 
       ;;
   esac
 done
