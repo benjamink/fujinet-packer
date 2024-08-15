@@ -1,15 +1,15 @@
 #!/usr/bin/env bash 
-set -x
+#set -x
 
 #ALTIRRA_URL="https://virtualdub.org/downloads/Altirra-4.20.zip"
 FUJINET_ROOT="$HOME/FujiNet"
 
-RED="\e[31m"
-YELLOW="\e[1;33m"
-GREEN="\e[32m"
-BLUE="\e[34m"
-DARK_GRAY="\e[1;30m"
-NOCOLOR="\e[0m"
+RED="\033[31m"
+YELLOW="\033[1;33m"
+GREEN="\033[32m"
+BLUE="\033[1;34m"
+DARK_GRAY="\033[1;30m"
+NOCOLOR="\033[0m"
 
 function usage() {
   echo -e "${YELLOW}$(basename $0) ${DARK_GRAY}[-h]${NOCOLOR}"
