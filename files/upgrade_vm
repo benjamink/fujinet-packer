@@ -96,7 +96,7 @@ function do_dir2atr() {
   sudo make -f Makefile.posix install 
 }
 
-while getopts ":pltwaf" opts
+while getopts ":pltwafd" opts
 do
   case "$opts" in 
     p)
