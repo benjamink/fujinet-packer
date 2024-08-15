@@ -12,13 +12,15 @@ DARK_GRAY="\033[1;30m"
 NOCOLOR="\033[0m"
 
 function usage() {
-  echo -e "${YELLOW}upgrade_vm ${DARK_GRAY}[-a|-p|-l|-t|-w|-h]${NOCOLOR}"
+  echo -e "${YELLOW}upgrade_vm ${DARK_GRAY}[-a|-p|-l|-t|-w|-f|-d|-h]${NOCOLOR}"
   echo -e "${BLUE}"
   echo "  -a - Upgrade everything"
   echo "  -p - Upgrade packages"
   echo "  -l - Upgrade fn-pc-apple"
   echo "  -t - Upgrade fn-pc-atari"
   echo "  -w - Upgrade AppleWin"
+  echo "  -f - Upgrade tnfsd"
+  echo "  -d - Upgrade dir2atr"
   echo "  -h - Print this help"
   echo -e "${NOCOLOR}"
   exit 1
@@ -77,7 +79,24 @@ function do_applewin() {
   sudo make install 
 }
 
-while getopts ":pltwa" opts
+function do_tnfsd() {
+  message "Upgrade tnfsd ..."
+  sudo curl -sLo /usr/local/sbin/tnfsd "https://fujinet.online/firmware/tnfsd.linux64"
+  sudo chmod +x /usr/local/sbin/tnfsd 
+  sudo systemctl restart tnfsd
+}
+
+function do_dir2atr() {
+  message "Upgrade dir2atr ..."
+  CODE_PATH="$FUJINET_ROOT/AtariSIO"
+  git clone "https://github.com/HiassofT/AtariSIO.git" "$CODE_PATH"
+  cd "$CODE_PATH/tools" || exit
+
+  make -f Makefile.posix 
+  sudo make -f Makefile.posix install 
+}
+
+while getopts ":pltwaf" opts
 do
   case "$opts" in 
     p)
@@ -94,12 +113,20 @@ do
     w)
       do_applewin
       ;;
+    f) 
+      do_tnfsd 
+      ;;
+    d)
+      do_dir2atr 
+      ;;
     a)
       do_packages 
       do_firmware_repo 
       do_pc_apple
       do_pc_atari
       do_applewin
+      do_tnfsd
+      do_dir2atr
       ;;
     *) 
       usage 
