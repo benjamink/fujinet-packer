@@ -26,7 +26,8 @@ variable "sources" {
   description = "Specify which source type(s) to build"
   default = [
     "source.virtualbox-iso.fujinet",
-    "source.vmware-iso.fujinet"
+    "source.vmware-iso.fujinet",
+    "source.qemu.fujinet"
   ]
 }
 
@@ -35,40 +36,40 @@ variable "sources" {
 locals {
   username        = "fujinet"
   altirra_zip_url = "https://virtualdub.org/downloads/Altirra-4.20.zip"
-  iso_url         = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.5.0-amd64-netinst.iso"
-  iso_checksum    = "sha256:013f5b44670d81280b5b1bc02455842b250df2f0c6763398feb69af1a805a14f"
+  iso_url         = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.9.0-amd64-netinst.iso"
+  iso_checksum    = "sha256:1257373c706d8c07e6917942736a865dfff557d21d76ea3040bb1039eb72a054"
 }
 
 // QEMU source is currently unused & untested.  The below may be developed & used at a future time.
-//source "qemu" "fujinet" {
-//  iso_url          = local.iso_url
-//  iso_checksum     = local.iso_checksum
-//  ssh_username     = local.username
-//  ssh_password     = "online"
-//  ssh_wait_timeout = "3600s"
-//  ssh_pty          = true
-//  boot_wait        = "10s"
-//  disk_size        = "25000"
-//  disk_compression = true
-//  format           = "qcow2"
-//  headless         = true
-//  cpus             = 4
-//  accelerator      = "kvm"
-//  memory           = 8192
-//  net_device       = "virtio-net"
-//  output_directory = "output-qemu"
-//  vm_name          = "fujinet-debian12-qemu.qcow2"
-//  http_directory   = "http"
-//  boot_command = [
-//    "<wait><esc><wait>",
-//    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/qemu-preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
-//  ]
-//  qemuargs = [
-//    ["-m", "4096M"],
-//    ["-smp", "2"]
-//  ]
-//  shutdown_command = "echo 'online' | sudo -S shutdown -P now"
-//}
+source "qemu" "fujinet" {
+  iso_url          = local.iso_url
+  iso_checksum     = local.iso_checksum
+  ssh_username     = local.username
+  ssh_password     = "online"
+  ssh_wait_timeout = "3600s"
+  ssh_pty          = true
+  boot_wait        = "10s"
+  disk_size        = "25000"
+  disk_compression = true
+  format           = "qcow2"
+  headless         = true
+  cpus             = 4
+  accelerator      = "kvm"
+  memory           = 8192
+  net_device       = "virtio-net"
+  output_directory = "output-qemu"
+  vm_name          = "fujinet-debian12-qemu.qcow2"
+  http_directory   = "http"
+  boot_command = [
+    "<wait><esc><wait>",
+    "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/qemu-preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
+  ]
+  qemuargs = [
+    ["-m", "4096M"],
+    ["-smp", "2"]
+  ]
+  shutdown_command = "echo 'online' | sudo -S shutdown -P now"
+}
 
 // VMware source is currently unused & untested.  The below may be developed & used at a future time.
 source "vmware-iso" "fujinet" {
@@ -223,6 +224,11 @@ build {
   provisioner "file" {
     source      = "files/FujiNet-Logo-NoText-black.png"
     destination = "/home/${local.username}/Pictures/fn-logo-black.png"
+  }
+
+  provisioner "file" {
+    source      = "files/upgrade_vm"
+    destination = "/home/${local.username}/.local/bin/upgrade_vm"
   }
 
   provisioner "shell" {

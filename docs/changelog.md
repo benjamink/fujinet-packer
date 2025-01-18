@@ -8,6 +8,7 @@ Visit the [Getting Started](gettingstarted.md) page for details on downloading &
   - Features
     - General `fujinet-firmware` updates
     - Add VMWare OVA build
+    - `upgrade_vm` script to do in-place upgrade of components in the VM
 
 ## 0.5.2
 
