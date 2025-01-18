@@ -2,7 +2,7 @@
 
 VERSION="test" 
 COPY_ONLY="false"
-LOCAL_ONLY="false"
+LOCAL_ONLY="true"
 OUTPUT_FLAG=""
 
 function usage() {
@@ -10,7 +10,7 @@ function usage() {
   echo
   echo "  -o <build_output> Set the type of VM to build (default 'virtualbox-iso', alternative 'qemu', 'vmware-iso')"
   echo "  -v <version>      Provide a version for the VM build (default: 'test')"
-  echo "  -l                If set build WILL NOT be uploaded to MEGA (local only)" 
+  echo "  -u                If set build WILL be uploaded to MEGA (local only)" 
   echo "  -c                Just copy the OVA to MEGA"
   echo "  -n                Disable (no) color"
   echo "  -h                Display this help"
@@ -18,12 +18,12 @@ function usage() {
   exit 1
 }
 
-while getopts "v:o:lcnh" opt
+while getopts "v:o:lucnh" opt
 do
   case "$opt" in
     o) OUTPUT_TYPE="$OPTARG" ;;
     v) VERSION="$OPTARG" ;;
-    l) LOCAL_ONLY="true" ;;
+    u) LOCAL_ONLY="false" ;;
     c) COPY_ONLY="true" ;;
     n) COLOR_FLAG="-color=false" ;;
     *) usage ;;
@@ -62,7 +62,7 @@ then
         ;;
       *)
         mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VM-Testing/test-fujinet-debian12-vbox.ova"
-        #mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VM-Testing/test-fujinet-debian12-qemu.qcow2"
+        mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VM-Testing/test-fujinet-debian12-qemu.qcow2"
         mega-put "output-vmware/fujinet-debian12-vmware.ova" "FujiNet/VM-Testing/test-fujinet-debian12-vmware.ova"
         ;;
     esac  
@@ -79,7 +79,7 @@ then
         ;;
       *)
         mega-put "output/fujinet-debian12-vbox.ova" "FujiNet/VirtualMachine/fujinet-debian12-vbox-${VERSION}.ova"
-        #mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VirtualMachine/fujinet-debian12-qemu-${VERSION}.qcow2"
+        mega-put "output-qemu/fujinet-debian12-qemu.qcow2" "FujiNet/VirtualMachine/fujinet-debian12-qemu-${VERSION}.qcow2"
         mega-put "output-vmware/fujinet-debian12-vmware.ova" "FujiNet/VirtualMachine/fujinet-debian12-vmware-${VERSION}.ova"
         ;;
     esac
