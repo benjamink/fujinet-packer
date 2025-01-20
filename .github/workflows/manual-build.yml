@@ -34,9 +34,9 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Manual Build All
-        if: github.event.inputs.output == "all"
+        if: github.event.inputs.output == 'all'
         run: ./packer_build.sh -u -v ${{ github.event.inputs.version }}
 
       - name: Manual Build ${{ inputs.output }}
-        if: github.event.inputs.output != "all"
+        if: github.event.inputs.output != 'all'
         run: ./packer_build.sh -u -v ${{ github.event.inputs.version }} -o ${{ github.event.inputs.output }}
