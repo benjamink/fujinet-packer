@@ -11,6 +11,14 @@ on:
         type: string
         default: test
         required: true
+      output:
+        description: Appliance output type
+        type: choose
+        options:
+          - all 
+          - virtualbox-iso 
+          - vmware-iso 
+          - qemu
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,5 +33,10 @@ jobs:
       - uses: actions/checkout@v4
 
       # Runs a set of commands using the runners shell
-      - name: Manual Build
+      - name: Manual Build All
+        if: github.event.inputs.output == "all"
         run: ./packer_build.sh -u -v ${{ github.event.inputs.version }}
+
+      - name: Manual Build ${{ inputs.output }}
+        if: github.event.inputs.output != "all"
+        run: ./packer_build.sh -u -v ${{ github.event.inputs.version }} -o ${{ github.event.inputs.output }}
