@@ -26,4 +26,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Manual Build
-        run: ./packer_build.sh -v ${{ github.event.inputs.version }}
+        run: ./packer_build.sh -u -v ${{ github.event.inputs.version }}

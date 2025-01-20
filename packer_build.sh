@@ -1,30 +1,34 @@
 #!/usr/bin/env bash
+set -x
 
 VERSION="test" 
 COPY_ONLY="false"
+CLEAN_ALL="false"
 LOCAL_ONLY="true"
 OUTPUT_FLAG=""
 
 function usage() {
-  echo "$0 [-o build_output] [-v version] [-l] [-c] [-n] [-h]"
+  echo "$0 [-o build_output] [-v version] [-l] [-c] [-x] [-n] [-h]"
   echo
   echo "  -o <build_output> Set the type of VM to build (default 'virtualbox-iso', alternative 'qemu', 'vmware-iso')"
   echo "  -v <version>      Provide a version for the VM build (default: 'test')"
   echo "  -u                If set build WILL be uploaded to MEGA (local only)" 
   echo "  -c                Just copy the OVA to MEGA"
+  echo "  -x                Clean all former builds"
   echo "  -n                Disable (no) color"
   echo "  -h                Display this help"
   echo
   exit 1
 }
 
-while getopts "v:o:lucnh" opt
+while getopts "v:o:lucxnh" opt
 do
   case "$opt" in
     o) OUTPUT_TYPE="$OPTARG" ;;
     v) VERSION="$OPTARG" ;;
     u) LOCAL_ONLY="false" ;;
     c) COPY_ONLY="true" ;;
+    x) CLEAN_ALL="true" ;;
     n) COLOR_FLAG="-color=false" ;;
     *) usage ;;
   esac
@@ -33,6 +37,12 @@ done
 if [[ -n "$OUTPUT_TYPE" ]]
 then
   OUTPUT_FLAG="-only=build.${OUTPUT_TYPE}.fujinet"
+fi
+
+if [[ "$CLEAN_ALL" == "true" ]]
+then 
+  rm -rf "$HOME/VirtualBox\ VMs/fujinet-debian12-vbox"
+  rm -f "./output*/*"
 fi
 
 if [[ "$VERSION" != "test" ]]

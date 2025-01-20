@@ -131,6 +131,7 @@ source "virtualbox-iso" "fujinet" {
     "auto lowmem/low=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/vbox-preseed.cfg netcfg/get_hostname=fujinet-vm<enter><wait><enter>"
   ]
   vboxmanage = [
+    ["modifyvm", "{{.Name}}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{.Name}}", "--memory", "4096"],
     ["modifyvm", "{{.Name}}", "--cpus", "2"],
     ["modifyvm", "{{.Name}}", "--draganddrop", "bidirectional"],
