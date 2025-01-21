@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -x
+#set -x
 
 VERSION="test" 
 COPY_ONLY="false"

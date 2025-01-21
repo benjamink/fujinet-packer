@@ -207,6 +207,7 @@ build {
       "scripts/build-install-fn-pc-atari.sh",
       "scripts/install-altirra.sh",
       "scripts/install-applewin-linux.sh",
+      "scripts/install-cocomame.sh",
       "scripts/firstboot-setup.sh",
       "scripts/xfce-fujinet-menu.sh"
     ]
