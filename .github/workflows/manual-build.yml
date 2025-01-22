@@ -37,6 +37,6 @@ jobs:
         if: github.event.inputs.output == 'all'
         run: ./packer_build.sh -u -v ${{ github.event.inputs.version }}
 
-      - name: Manual Build ${{ inputs.output }}
+      - name: Manual Build ${{ github.event.inputs.output }}
         if: github.event.inputs.output != 'all'
         run: ./packer_build.sh -u -v ${{ github.event.inputs.version }} -o ${{ github.event.inputs.output }}
