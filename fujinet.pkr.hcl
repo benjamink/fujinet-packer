@@ -150,6 +150,11 @@ build {
     destination = "/tmp/wallpaper.png"
   }
 
+  provisioner "file" {
+    source      = "files/cocomame.tar.gz"
+    destination = "/tmp/cocomame.tar.gz"
+  }
+  
   /*
   provisioner "file" {
     source      = "files/VCF-Logo-Wallpaper1.png"
