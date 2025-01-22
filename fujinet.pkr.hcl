@@ -210,6 +210,7 @@ build {
       "scripts/setup-fujinet-apps.sh",
       "scripts/build-install-fn-pc-apple.sh",
       "scripts/build-install-fn-pc-atari.sh",
+      "scripts/build-install-fn-pc-coco.sh",
       "scripts/install-altirra.sh",
       "scripts/install-applewin-linux.sh",
       "scripts/install-cocomame.sh",

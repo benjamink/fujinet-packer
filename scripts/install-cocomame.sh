@@ -1,7 +1,10 @@
 #!/usr/bin/env bash 
 set -x 
 
+sudo apt-get install -y -qq qtbase5-dev libsdl2-ttf-dev 
+
 LAUNCHER_PATH="/home/$P_USERNAME/Desktop/CoCoMAME.desktop"
+WEB_URL_PATH="/home/$P_USERNAME/Desktop/FujiNet-CoCo-WebUI.desktop"
 CODE_PATH="${P_FN_PATH}/CoCoMAME"
 mkdir -p "$CODE_PATH" 
 cd "$CODE_PATH" || exit
@@ -15,7 +18,7 @@ Comment=FujiNet connected to CoCo MAME
 Type=Application
 Exec=$CODE_PATH/cocomame coco2b -window -ext fdc,bios=hdbk3 -skip_gameinfo
 Path=$CODE_PATH
-Icon=org.Xfce.settings.color
+Icon=org.xfce.settings.color
 EOF
 
 chmod +x "$LAUNCHER_PATH"
