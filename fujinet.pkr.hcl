@@ -240,7 +240,11 @@ build {
   }
 
   provisioner "shell" {
+    environment_vars = [
+      "P_USERNAME=${local.username}",
+    ]
     scripts = [
+      "scripts/setup_upgradevm.sh",
       "scripts/cleanup.sh"
     ]
   }

@@ -7,7 +7,6 @@ FN_PATH="${P_FN_PATH:-/home/$P_USERNAME/FujiNet}"
 INSTALL_PATH="$FN_PATH/FujiNet-PC-CoCo"
 mkdir -p "$INSTALL_PATH"
 cd "$FN_PATH" || exit
-
 git clone https://github.com/FujiNetWIFI/fujinet-firmware
 
 FNPIO_PATH="$FN_PATH/fujinet-firmware"

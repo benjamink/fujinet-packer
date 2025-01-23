@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -x
 
-sudo apt-get install -y epiphany-browser figlet
+sudo apt-get install -y epiphany-browser figlet onboard
 
 mkdir "/home/$P_USERNAME/Desktop"
 mkdir "/home/$P_USERNAME/Pictures"

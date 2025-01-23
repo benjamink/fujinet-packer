@@ -12,12 +12,13 @@ DARK_GRAY="\033[1;30m"
 NOCOLOR="\033[0m"
 
 function usage() {
-  echo -e "${YELLOW}upgrade_vm ${DARK_GRAY}[-a|-p|-l|-t|-w|-f|-d|-h]${NOCOLOR}"
+  echo -e "${YELLOW}upgrade_vm ${DARK_GRAY}[-a|-p|-l|-t|-w|-f|-c|-d|-h]${NOCOLOR}"
   echo -e "${BLUE}"
   echo "  -a - Upgrade everything"
   echo "  -p - Upgrade packages"
   echo "  -l - Upgrade fn-pc-apple"
   echo "  -t - Upgrade fn-pc-atari"
+  echo "  -c - Upgrade fn-pc-coco"
   echo "  -w - Upgrade AppleWin"
   echo "  -f - Upgrade tnfsd"
   echo "  -d - Upgrade dir2atr"
@@ -67,6 +68,15 @@ function do_pc_atari() {
   sudo systemctl restart fn-emulator-bridge
 }
 
+function do_pc_coco() {
+  message "Upgrading fn-pc-coco ..."
+  cd "$FUJINET_ROOT/fujinet-firmware"
+  sudo systemctl stop fn-pc-coco 
+  ./build.sh -p COCO
+  rsync -au "$HOME/FujiNet/fujinet-firmware/build/dist/" "$HOME/FujiNet/FujiNet-PC-CoCo"
+  sudo systemctl restart fn-pc-coco 
+}
+
 function do_applewin() {
   message "Upgrade AppleWin ..."
   cd "$FUJINET_ROOT/AppleWin"
@@ -96,7 +106,7 @@ function do_dir2atr() {
   sudo make -f Makefile.posix install 
 }
 
-while getopts ":pltwafd" opts
+while getopts ":pltcwafd" opts
 do
   case "$opts" in 
     p)
@@ -109,6 +119,9 @@ do
     t)
       do_firmware_repo
       do_pc_atari
+      ;;
+    c)
+      do_pc_coco 
       ;;
     w)
       do_applewin
@@ -124,6 +137,7 @@ do
       do_firmware_repo 
       do_pc_apple
       do_pc_atari
+      do_pc_coco
       do_applewin
       do_tnfsd
       do_dir2atr
