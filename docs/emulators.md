@@ -17,3 +17,9 @@ FujiNet VM uses a [customized build](https://github.com/FujiNetWIFI/AppleWin) of
 Just like with the Altirra emulator, the AppleWin emulator can be started by double-clicking on the desktop icon labeled "AppleWin".  The emulator should automatically boot with the FujiNet virtual device attached & run the CONFIG utility.
 
 ![Running AppleWin](./media/fujinet-apple-running.png)
+
+## CoCoMAME (Tandy CoCo)
+
+The FujiNet Tandy CoCo emulation uses [MAME](https://www.mamedev.org/) with the Becker port enabled to be able to interface with the custom `fujinet-pc-coco` FujiNet device.  Running the CoCo emulation should automatically boot FujiNet CONFIG & be ready for usage.  There is also a shortcut to the web UI for the dedicated `fujinet-pc-coco` just like the other emulated systems.
+
+![Running CoCoMAME](./media/fujinet-coco-running.png)
