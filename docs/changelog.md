@@ -2,6 +2,14 @@
 
 Visit the [Getting Started](gettingstarted.md) page for details on downloading & installing the latest version of the VM.
 
+## 0.6.0 
+
+- 2025-01-25
+  - Features 
+    - General `fujinet-firmware` updates
+    - Add CoCo emulation via MAME 
+    - Add desktop shortcut to `upgrade_vm` 
+
 ## 0.5.3
 
 - 2024-08-05
