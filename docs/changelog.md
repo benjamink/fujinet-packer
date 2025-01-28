@@ -2,6 +2,12 @@
 
 Visit the [Getting Started](gettingstarted.md) page for details on downloading & installing the latest version of the VM.
 
+## 0.6.1 
+
+- 2025-01-27
+  - Features
+    - Rebuild VirtualBox VM with VirtualBox 7.1 latest
+
 ## 0.6.0 
 
 - 2025-01-25
